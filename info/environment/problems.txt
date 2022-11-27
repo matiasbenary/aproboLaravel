@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/65564197/laravel-sail-rebuild-default-database
+https://stackoverflow.com/questions/66077795/laravel-sail-database-user-not-created

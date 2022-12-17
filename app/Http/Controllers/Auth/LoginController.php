@@ -14,6 +14,7 @@ class LoginController extends Controller
     public function checkEmail(CheckEmailRequest $request)
     {
         $user = (bool) User::findByEmail($request->email);
+
         if ($user) {
             return response()->json(['user' => ['The user exists']]);
         }
@@ -27,7 +28,7 @@ class LoginController extends Controller
             return response()->json(['user' => ['The user or password is not correct']], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $user = User::findByEmail($request->email);
+        $user = User::findByEmail($request->email)->first();
         $user->tokens()->delete();
         $token = $user->createToken('token')->plainTextToken;
 

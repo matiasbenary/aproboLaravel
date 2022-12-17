@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\EloquentBuilders\UserBuilder;
 use App\QueryBuilders\UserQueryBuilder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -72,7 +74,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-
+    public function newEloquentBuilder($query): Builder
+    {
+        return new UserBuilder($query);
+    }
 
     public function supplier()
     {
@@ -82,10 +87,5 @@ class User extends Authenticatable
     public function entities()
     {
         return $this->belongsToMany(Entity::class)->withPivot('is_owner', 'is_supplier', 'is_admin');
-    }
-
-    public static function findByEmail($email)
-    {
-        return  self::whereEmail($email)->first();
     }
 }

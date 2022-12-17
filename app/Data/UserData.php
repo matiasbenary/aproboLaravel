@@ -8,7 +8,6 @@ use Spatie\LaravelData\Data;
 /** @typescript */
 class UserData extends Data
 {
-
     public function __construct(
         public string $name,
         public string $email,
@@ -23,8 +22,8 @@ class UserData extends Data
          string $email,
          string $password,
          bool $is_root,
-         bool $is_supplier,): self
+         bool $is_supplier, ): self
     {
-        return new self($name, $email,Hash::make($password),$is_root,$is_supplier);
+        return new self($name, $email, Hash::make($password), $is_root, $is_supplier);
     }
 }

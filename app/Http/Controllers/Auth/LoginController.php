@@ -24,7 +24,7 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (! Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json(['user' => ['The user or password is not correct']], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 

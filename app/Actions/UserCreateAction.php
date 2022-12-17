@@ -5,14 +5,14 @@ namespace App\Actions;
 use App\Data\UserData;
 use App\Models\User;
 
-class UserCreateAction implements Actions{
-    public function __construct(public UserData $UserData){}
+class UserCreateAction implements Actions
+{
+    public function __construct(public UserData $userData)
+    {
+    }
 
     public function execute()
     {
-        info($this->UserData->toArray());
-       $user = new User($this->UserData->toArray());
-        $user->save();
+        return User::create($this->userData->toArray());
     }
-
 }

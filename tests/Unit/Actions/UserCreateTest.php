@@ -5,17 +5,17 @@ namespace Tests\Unit\Actions;
 use App\Actions\UserCreateAction;
 use App\Data\UserData;
 use App\Models\User;
-use Hash;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mail;
+use Tests\TestCase;
 
 class CreateUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function getUser():UserData{
-        return UserData::from(name: "test", email: "test@test.com", password: "qweqwe", is_root: false, is_supplier: true);
+    protected function getUser(): UserData
+    {
+        return UserData::from(name: 'test', email: 'test@test.com', password: 'qweqwe', is_root: false, is_supplier: true);
     }
 
     public function test_add_new_user()
@@ -28,7 +28,7 @@ class CreateUserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'test@test.com',
             'is_root' => 0,
-            "is_supplier" => 1
+            'is_supplier' => 1,
         ]);
     }
 

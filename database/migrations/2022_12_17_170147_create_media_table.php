@@ -13,12 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('business_name');
-            $table->unsignedBigInteger('ciut_cuil');
-            $table->unsignedBigInteger('cbu');
+
+            $table->string('name');
+            $table->string('file_name');
+            $table->string('mime_type');
+            $table->string('path');
+            $table->string('disk')->default('local');
+            $table->string('file_hash', 64)->unique();
+            $table->string('collection')->nullable();
+
+            $table->unsignedBigInteger('size');
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('media');
     }
 };

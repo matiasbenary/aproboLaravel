@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Entity;
+use App\Models\Project;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -29,6 +30,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(EntitySeeder::class);
 
         $entity = Entity::factory()->create();
+
+        Project::factory()->count(3)->for($entity)->create();
+        info($entity->toArray());
         $admin = User::factory()
             ->hasAttached($entity, [
                 'is_owner' => true,

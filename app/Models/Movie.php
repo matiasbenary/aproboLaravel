@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $cover
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Movie newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie query()

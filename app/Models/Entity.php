@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
+ *
  * @method static \Database\Factories\EntityFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Entity newQuery()

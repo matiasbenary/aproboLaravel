@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Supplier
  *
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier query()
  * @mixin \Eloquent
+ *
  * @property int $id
  * @property int $user_id
  * @property string $business_name
@@ -20,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $cbu
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Database\Factories\SupplierFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereBusinessName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereCbu($value)

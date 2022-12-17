@@ -25,11 +25,11 @@ class StoreMovieRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'release_year' => ['required', 'digits:4', 'integer', 'min:1900', 'max:' . (date('Y') + 1)],
+            'release_year' => ['required', 'digits:4', 'integer', 'min:1900', 'max:'.(date('Y') + 1)],
             'director' => ['required', 'string'],
             'description' => ['string', 'max:100000'],
             'genre' => ['required', 'array'],
-            'cover' => ['image', 'required']
+            'cover' => ['image', 'required'],
         ];
     }
 }

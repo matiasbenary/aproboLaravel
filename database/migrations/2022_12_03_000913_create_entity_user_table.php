@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('entity_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->year('release_year');
-            $table->string('director');
-            $table->mediumText('description');
-            $table->text('genre');
-            $table->string('cover');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('entity_id')->constrained();
+            $table->tinyInteger('is_owner')->default(true);
+            $table->tinyInteger('is_supplier')->default(false);
+            $table->tinyInteger('is_admin')->default(false);
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('entity_user');
     }
 };

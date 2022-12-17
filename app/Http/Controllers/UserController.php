@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMovieRequest;
-use App\Http\Requests\UpdateMovieRequest;
-use App\Models\Movie;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 
-class MovieController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +15,16 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::all();
-        return response($movies);
+        return response()->json(['users' => User::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMovieRequest  $request
+     * @param  \App\Http\Requests\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMovieRequest $request)
+    public function store(StoreUserRequest $request)
     {
         //
     }
@@ -33,10 +32,10 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show(User $user)
     {
         //
     }
@@ -44,11 +43,11 @@ class MovieController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMovieRequest  $request
-     * @param  \App\Models\Movie  $movie
+     * @param  \App\Http\Requests\UpdateUserRequest  $request
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMovieRequest $request, Movie $movie)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //
     }
@@ -56,10 +55,10 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy(User $user)
     {
         //
     }

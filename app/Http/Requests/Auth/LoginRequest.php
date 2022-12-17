@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMovieRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateMovieRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,12 +24,8 @@ class UpdateMovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string'],
-            'release_year' => ['digits:4', 'integer', 'min:1900', 'max:'.(date('Y') + 1)],
-            'director' => ['string'],
-            'description' => ['string', 'max:100000'],
-            'genre' => ['array'],
-            'cover' => ['image'],
+            'email' => ['required', 'string'],
+            'password' => ['required', 'string'],
         ];
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * App\Models\User
@@ -54,7 +55,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static UserBuilder|User findByEmail($email)
  * @method static UserBuilder|User onlySupplier()
  */
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -66,18 +67,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
         'is_root',
-        'is_supplier',
+        'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'remember_token',
+        'password',
     ];
 
     public function newEloquentBuilder($query): Builder
@@ -85,13 +80,18 @@ class User extends Authenticatable
         return new UserBuilder($query);
     }
 
-    public function supplier()
-    {
-        return $this->hasOne(Supplier::class);
-    }
-
     public function entities()
     {
         return $this->belongsToMany(Entity::class)->withPivot('is_owner', 'is_supplier', 'is_admin');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

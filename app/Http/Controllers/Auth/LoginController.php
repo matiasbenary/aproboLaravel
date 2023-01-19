@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CheckEmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
-use Auth;
 use Illuminate\Http\Response;
 
 class LoginController extends Controller
@@ -24,19 +23,59 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (! Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return response()->json(['user' => ['The user or password is not correct']], Response::HTTP_UNPROCESSABLE_ENTITY);
+        $credentials = request(['email', 'password']);
+
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $user = User::findByEmail($request->email)->first();
-        $user->tokens()->delete();
-        $token = $user->createToken('token')->plainTextToken;
-
-        return response()->json(['token' => $token]);
+        return $this->respondWithToken($token);
     }
 
-    public function ping()
+    /**
+     * Get the token array structure.
+     *
+     * @param  string  $token
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
     {
-        return 'pong';
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+        ]);
+    }
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
     }
 }

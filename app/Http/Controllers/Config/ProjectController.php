@@ -1,32 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Config;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use GuzzleHttp\Handler\Proxy;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware(['jwt.verify', 'entity.header', 'hasPermission:project']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProjectRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+        $entityId = $request->header('entity-id');
+        $project = Project::select("id", "name")->where("entity_id", $entityId)->get();
+
+        return response()->json(["data" => compact("project")]);
+    }
+
     public function store(StoreProjectRequest $request)
     {
-        //
+
+        Project::create(["name" => $request->name, "entity_id" => $request->header("entity-id")]);
+        return response()->json(["message" => "Created successfully"]);
     }
 
     /**
@@ -49,7 +51,8 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        info($request->toArray());
+        info($project);
     }
 
     /**

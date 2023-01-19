@@ -24,17 +24,33 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
+ * @property string $business_name
+ * @property string $fantasy_name
+ * @property string $email
+ * @property int|null $cuit
+ * @property int|null $cbu
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Entity whereBusinessName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Entity whereCbu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Entity whereCuit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Entity whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Entity whereFantasyName($value)
  */
 class Entity extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'cbu',
+        'cuit',
+        'business_name',
+        'fantasy_name',
+        'email',
     ];
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('is_owner', 'is_supplier', 'is_admin');
+        return $this->belongsToMany(User::class)->withPivot('is_owner');
     }
 }

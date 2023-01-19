@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
-class ProjectSeeder extends Seeder
+class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +13,6 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(["name" => "project", "description" => "CRUD project"]);
+        //
     }
 }

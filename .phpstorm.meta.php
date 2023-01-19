@@ -94,6 +94,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
@@ -181,6 +183,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
@@ -268,6 +272,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
@@ -355,6 +361,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
@@ -442,6 +450,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::get(0), map([
@@ -529,6 +539,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::make(0), map([
@@ -616,6 +628,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\App::makeWith(0), map([
@@ -703,6 +717,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\app(0), map([
@@ -790,6 +806,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\resolve(0), map([
@@ -877,6 +895,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
@@ -964,6 +984,8 @@ namespace PHPSTORM_META {
             'migration.creator' => \Illuminate\Database\Migrations\MigrationCreator::class,
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'queue.listener' => \Illuminate\Queue\Listener::class,
+            'tymon.jwt.parser' => \Tymon\JWTAuth\Http\Parser\Parser::class,
+            'tymon.jwt.secret' => \Tymon\JWTAuth\Console\JWTGenerateSecretCommand::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         ]));
 

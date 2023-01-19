@@ -17,9 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('entity_id')->constrained();
-            $table->tinyInteger('is_owner')->default(true);
-            $table->tinyInteger('is_supplier')->default(false);
-            $table->tinyInteger('is_admin')->default(false);
+            $table->tinyInteger('is_owner')->default(false);
             $table->timestamps();
         });
     }

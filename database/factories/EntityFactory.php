@@ -17,7 +17,11 @@ class EntityFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'business_name' => fake()->name(),
+            'fantasy_name' => fake()->name(),
+            'cuit' => fake()->numerify('###########'),
+            'cbu' => fake()->numerify('###############'),
+            'email' => fake()->unique()->safeEmail(),
         ];
     }
 }

@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 use App\Models\Entity;
 use App\Models\Project;
-use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -29,42 +28,24 @@ class DatabaseSeeder extends Seeder
         // $this->call(SupplierSeeder::class);
         // $this->call(EntitySeeder::class);
 
-        $entity = Entity::factory()->create();
+        // $entity = Entity::factory()->create();
 
-        Project::factory()->count(3)->for($entity)->create();
-        info($entity->toArray());
-        $admin = User::factory()
-            ->hasAttached($entity, [
-                'is_owner' => true,
-                'is_supplier' => false,
-                'is_admin' => true,
-            ])->create([
-                'is_supplier' => false,
-                'is_root' => false,
-            ]);
+        // Project::factory()->count(3)->for($entity)->create();
+        // // info($entity->toArray());
+        // $admin = User::factory()
+        //     ->hasAttached($entity, [
+        //         'is_owner' => true,
+        //     ])->create([
+        //         'is_root' => false,
+        //     ]);
 
-        $users = User::factory(10)
-            ->hasAttached($entity, [
-                'is_owner' => true,
-                'is_supplier' => false,
-                'is_admin' => false,
-            ])->create([
-                'is_supplier' => false,
-                'is_root' => false,
-            ]);
+        // $users = User::factory(10)
+        //     ->hasAttached($entity, [
+        //         'is_owner' => false,
+        //     ])->create([
+        //         'is_root' => false,
+        //     ]);
 
-        Supplier::factory()->create([
-            'user_id' => User::factory()
-                ->hasAttached($entity, [
-                    'is_owner' => false,
-                    'is_supplier' => false,
-                    'is_admin' => true,
-                ])->create([
-                    'name' => 'supplierExample',
-                    'email' => 'supplier@example.com',
-                    'is_supplier' => false,
-                    'is_root' => true,
-                ]),
-        ]);
+        $this->call(ProjectSeeder::class);
     }
 }

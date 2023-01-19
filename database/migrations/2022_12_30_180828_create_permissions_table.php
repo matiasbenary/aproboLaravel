@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('entities', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('business_name');
-            $table->string('fantasy_name');
-            $table->string('email');
-            $table->unsignedBigInteger('cuit')->nullable();
-            $table->unsignedBigInteger('cbu')->nullable();
+
+            $table->string('name');
+            $table->string('description');
+
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entities');
+        Schema::dropIfExists('permissions');
     }
 };

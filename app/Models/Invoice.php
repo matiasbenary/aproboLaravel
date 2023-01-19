@@ -15,6 +15,42 @@ use Spatie\ModelStates\HasStates;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice query()
  * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $contract_id
+ * @property int $media_id
+ * @property int $project_id
+ * @property string $type
+ * @property string $currency
+ * @property int $amount
+ * @property mixed $state
+ * @property int $signatures
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Contract[] $contracts
+ * @property-read int|null $contracts_count
+ * @property-read \App\Models\Media $media
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice orWhereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice orWhereState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereContractId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereMediaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereSignatures($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUserId($value)
  */
 class Invoice extends Model
 {

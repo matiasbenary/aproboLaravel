@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_root')->default(false);
-            $table->boolean('is_supplier')->default(false);
-            $table->rememberToken();
             $table->timestamps();
         });
     }

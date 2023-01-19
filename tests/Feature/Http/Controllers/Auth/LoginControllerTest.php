@@ -11,8 +11,7 @@ class LoginControllerTest extends TestCase
     public function test_it_return_true_if_user_exits_in_check_email()
     {
         $user = User::factory()->create();
-        info($user->toArray());
-        $response = $this->post('api/checkEmail', ['email' => $user->email]);
+        $response = $this->postJson('api/checkEmail', ['email' => $user->email]);
 
         $response->assertStatus(200)
             ->assertJson(['user' => ['The user exists']]);
@@ -41,5 +40,12 @@ class LoginControllerTest extends TestCase
         $response = $this->postJson('api/login', ['email' => $user->email, 'password' => $password]);
 
         $response->assertStatus(200);
+    }
+
+    public function test_it_return_fail_login()
+    {
+        $response = $this->postJson('api/login', ['email' => 'random@123.com', 'password' => 'password123']);
+
+        $response->assertStatus(401);
     }
 }

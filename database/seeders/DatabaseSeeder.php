@@ -46,6 +46,6 @@ class DatabaseSeeder extends Seeder
         //         'is_root' => false,
         //     ]);
 
-        $this->call(ProjectSeeder::class);
+        $this->call(PermissionSeeder::class);
     }
 }

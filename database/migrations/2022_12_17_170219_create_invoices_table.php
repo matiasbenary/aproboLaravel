@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('contract_id')->nullable()->constrained();
-            $table->foreignId('media_id')->nullable()->constrained()->nullable();
+            $table->foreignId('media_id')->nullable()->constrained();
             $table->foreignId('project_id')->constrained();
             $table->enum('type', ['B', 'C', 'Nota de crédito']);
             $table->enum('currency', ['ARS', 'USD', 'MX', 'COP', 'Otro']);

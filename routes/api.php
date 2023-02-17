@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterClientController;
 use App\Http\Controllers\Config\ProjectController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +41,10 @@ Route::get('ping', function (Request $request) {
 });
 
 Route::get('projects', [ProjectController::class, 'index']);
+Route::get('projects/{project}', [ProjectController::class, 'show']);
 Route::post('projects', [ProjectController::class, 'store']);
-Route::put('projects/{projectId}', [ProjectController::class, 'update']);
+Route::put('projects/{project}', [ProjectController::class, 'update']);
+
+
+Route::get('suppliers', [SupplierController::class, 'index']);
+Route::post('suppliers', [SupplierController::class, 'store']);

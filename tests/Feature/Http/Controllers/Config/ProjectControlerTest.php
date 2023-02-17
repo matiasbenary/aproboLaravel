@@ -75,6 +75,31 @@ class ProjectControllerTest extends TestCase
             ]);
     }
 
+    public function test_get_project()
+    {
+        $init = $this->firstStep();
+        $entity = $init["entity"];
+        $token = $init["token"];
+
+        $project = Project::factory()->for($entity)->create([
+            "name" => "Marketing",
+            "entity_id" => $entity->id
+        ]);
+
+        $this->json('GET', '/api/projects/' . $project->id, [], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJson([
+                "data" => [
+                    "project" => [
+                        'id' => $project->id,
+                        'name'  => "Marketing",
+                    ]
+                ]
+
+            ]);
+    }
+
+
     public function test_get_all_projects_without_header()
     {
         $init = $this->firstStep();

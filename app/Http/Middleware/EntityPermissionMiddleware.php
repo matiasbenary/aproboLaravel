@@ -22,7 +22,7 @@ class EntityPermissionMiddleware
             ->first();
 
         if (!$checkPermission) {
-            return response()->json(['status' => 'you do not have permits'], Response::HTTP_UNAUTHORIZED);
+            return response()->json(['status' => 'you do not have permissions'], Response::HTTP_UNAUTHORIZED);
         }
 
         $request->is_owner = $checkPermission->is_owner;

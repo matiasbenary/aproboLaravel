@@ -31,28 +31,16 @@ class ProjectController extends Controller
         return response()->json(["message" => "Created successfully"]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
     public function show(Project $project)
     {
-        //
+        return response()->json(["data" => compact("project")]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProjectRequest  $request
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        info($request->toArray());
-        info($project);
+        $project->update($request->all());
+        return response()->json(['message' => 'Updated successfully']);
     }
 
     /**

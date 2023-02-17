@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('media_id')->nullable()->constrained();
+        Schema::create('suppliers', function (Blueprint $table) {
+            $table->foreignId('consumer_id')->references('id')->on('entities');
+            $table->foreignId('supplier_id')->references('id')->on('entities');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('suppliers');
     }
 };

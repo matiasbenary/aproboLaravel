@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -13,6 +14,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Permission::create(["name" => "project", "description" => "CRUD project"]);
+        Permission::create(["name" => "supplier", "description" => "CRUD supplier"]);
     }
 }

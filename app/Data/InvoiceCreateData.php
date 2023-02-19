@@ -8,6 +8,8 @@ use Spatie\LaravelData\Data;
 class InvoiceCreateData extends Data
 {
     public function __construct(
+        public int $consumer_id,
+        public int $supplier_id,
         public int $user_id,
         public int $project_id,
         public ?int $contract_id,
@@ -15,7 +17,9 @@ class InvoiceCreateData extends Data
         public string $type,
         public string $currency,
         public int $amount,
-        public ?InvoiceState $state
+        public ?InvoiceState $state,
+        public string $responsible_email,
+        public string $message
     ) {
     }
 }

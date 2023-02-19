@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterClientController;
 use App\Http\Controllers\Config\ProjectController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,3 +49,7 @@ Route::put('projects/{project}', [ProjectController::class, 'update']);
 
 Route::get('suppliers', [SupplierController::class, 'index']);
 Route::post('suppliers', [SupplierController::class, 'store']);
+
+
+Route::get('invoices', [InvoiceController::class, 'index']);
+Route::post('invoices', [InvoiceController::class, 'store']);

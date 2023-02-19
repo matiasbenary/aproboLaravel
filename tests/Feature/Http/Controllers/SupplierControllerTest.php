@@ -115,6 +115,6 @@ class SupplierControllerTest extends TestCase
             'cbu' => 12345678
         ]);
 
-        $this->assertDatabaseCount('entities', 2);
+        $this->assertDatabaseCount('entities', 4);
     }
 }

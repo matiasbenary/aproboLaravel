@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('consumer_id')->references('id')->on('entities');
+            $table->foreignId('supplier_id')->references('id')->on('entities');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('contract_id')->nullable()->constrained();
             $table->foreignId('media_id')->nullable()->constrained();
@@ -23,6 +25,8 @@ return new class extends Migration
             $table->enum('currency', ['ARS', 'USD', 'MX', 'COP', 'Otro']);
             $table->unsignedBigInteger('amount');
             $table->string('state');
+            $table->string('responsible_email');
+            $table->text('message');
             $table->unsignedSmallInteger('signatures')->default(0);
             $table->timestamps();
         });

@@ -41,4 +41,15 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'file_name',
+        'mime_type',
+        'path',
+        'file_hash',
+        'collection',
+        'state',
+        'signatures',
+        'size'
+    ];
 }

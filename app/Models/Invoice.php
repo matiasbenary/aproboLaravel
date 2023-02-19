@@ -57,6 +57,8 @@ class Invoice extends Model
     use HasFactory, HasStates;
 
     protected $fillable = [
+        'consumer_id',
+        'supplier_id',
         'user_id',
         'contract_id',
         'media_id',
@@ -65,6 +67,8 @@ class Invoice extends Model
         'amount',
         'state',
         'signatures',
+        'responsible_email',
+        'message',
     ];
 
     protected $casts = [

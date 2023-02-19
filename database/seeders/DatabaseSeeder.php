@@ -28,23 +28,23 @@ class DatabaseSeeder extends Seeder
         // $this->call(SupplierSeeder::class);
         // $this->call(EntitySeeder::class);
 
-        // $entity = Entity::factory()->create();
+        $entity = Entity::factory()->create();
 
-        // Project::factory()->count(3)->for($entity)->create();
-        // // info($entity->toArray());
-        // $admin = User::factory()
-        //     ->hasAttached($entity, [
-        //         'is_owner' => true,
-        //     ])->create([
-        //         'is_root' => false,
-        //     ]);
+        Project::factory()->count(3)->for($entity)->create();
+        // info($entity->toArray());
+        $admin = User::factory()
+            ->hasAttached($entity, [
+                'is_owner' => true,
+            ])->create([
+                'is_root' => false,
+            ]);
 
-        // $users = User::factory(10)
-        //     ->hasAttached($entity, [
-        //         'is_owner' => false,
-        //     ])->create([
-        //         'is_root' => false,
-        //     ]);
+        $users = User::factory(10)
+            ->hasAttached($entity, [
+                'is_owner' => false,
+            ])->create([
+                'is_root' => false,
+            ]);
 
         $this->call(PermissionSeeder::class);
     }

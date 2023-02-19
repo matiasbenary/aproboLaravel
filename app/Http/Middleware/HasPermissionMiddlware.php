@@ -19,7 +19,6 @@ class HasPermissionMiddlware
      */
     public function handle(Request $request, Closure $next, $role)
     {
-
         if ($request->is_owner) {
             return $next($request);
         }
@@ -32,7 +31,6 @@ class HasPermissionMiddlware
             ->where("entity_id", $request->header("entity-id"))
             ->where("user_id", auth()->payload()->get('sub'))
             ->first();
-
         if (!$checkPermission) {
             return response()->json(['status' => 'you do not have permissions'], Response::HTTP_UNAUTHORIZED);
         }

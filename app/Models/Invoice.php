@@ -75,6 +75,7 @@ class Invoice extends Model
         'signatures',
         'responsible_email',
         'message',
+        'currency'
     ];
 
     protected $casts = [

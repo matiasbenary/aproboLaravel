@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('type', ['B', 'C', 'Nota de crédito']);
             $table->enum('currency', ['ARS', 'USD', 'MX', 'COP', 'Otro']);
             $table->unsignedBigInteger('amount');
-            $table->string('state')->default('OC');
+            $table->string('state');
             $table->string('responsible_email');
             $table->text('message');
             $table->unsignedSmallInteger('signatures')->default(0);

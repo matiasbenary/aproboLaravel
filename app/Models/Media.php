@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Media newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media query()
- * @mixin \Eloquent
  * @property int $id
  * @property string $name
  * @property string $file_name
@@ -35,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Media wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Media extends Model
 {

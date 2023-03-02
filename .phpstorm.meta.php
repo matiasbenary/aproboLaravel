@@ -40,6 +40,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -129,6 +130,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -218,6 +220,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -307,6 +310,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -396,6 +400,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -485,6 +490,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -574,6 +580,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -663,6 +670,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -752,6 +760,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -841,6 +850,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -930,6 +940,7 @@ namespace PHPSTORM_META {
             'Illuminate\Database\Console\PruneCommand' => \Illuminate\Database\Console\PruneCommand::class,
             'Illuminate\Database\Console\WipeCommand' => \Illuminate\Database\Console\WipeCommand::class,
             'Illuminate\Foundation\Console\ClearCompiledCommand' => \Illuminate\Foundation\Console\ClearCompiledCommand::class,
+            'Illuminate\Foundation\Console\DocsCommand' => \Illuminate\Foundation\Console\DocsCommand::class,
             'Illuminate\Foundation\Console\DownCommand' => \Illuminate\Foundation\Console\DownCommand::class,
             'Illuminate\Foundation\Console\EnvironmentCommand' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
             'Illuminate\Foundation\Console\EventCacheCommand' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -990,6 +1001,10 @@ namespace PHPSTORM_META {
         ]));
 
 
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::mock(0), map(["" => "@&\Mockery\MockInterface"]));
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::partialMock(0), map(["" => "@&\Mockery\MockInterface"]));
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::instance(0), type(1));
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::spy(0), map(["" => "@&\Mockery\MockInterface"]));
     override(\Illuminate\Support\Arr::add(0), type(0));
     override(\Illuminate\Support\Arr::except(0), type(0));
     override(\Illuminate\Support\Arr::first(0), elementType(0));

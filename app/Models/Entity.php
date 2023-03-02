@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string $business_name
  * @property string $fantasy_name
  * @property string $email
@@ -38,6 +37,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read int|null $consumers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|Entity[] $suppliers
  * @property-read int|null $suppliers_count
+ * @mixin \Eloquent
  */
 class Entity extends Model
 {

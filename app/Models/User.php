@@ -23,7 +23,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @mixin \Eloquent
  * @property int $id
  * @property string $name
  * @property string $email
@@ -49,6 +48,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsSupplier($value)
  * @method static UserBuilder|User findByEmail($email)
  * @method static UserBuilder|User onlySupplier()
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements JWTSubject
 {

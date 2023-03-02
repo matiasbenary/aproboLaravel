@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
- * @mixin \Eloquent
  * @property int $id
  * @property string $name
  * @property int $entity_id
@@ -30,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereExecutionProcess($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project wherePaymentOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project wherePurchaseOrder($value)
+ * @mixin \Eloquent
  */
 class Project extends Model
 {

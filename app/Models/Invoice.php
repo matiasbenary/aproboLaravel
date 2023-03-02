@@ -14,7 +14,6 @@ use Spatie\ModelStates\HasStates;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice query()
- * @mixin \Eloquent
  * @property int $id
  * @property int $user_id
  * @property int $contract_id
@@ -57,6 +56,7 @@ use Spatie\ModelStates\HasStates;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereResponsibleEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereSupplierId($value)
+ * @mixin \Eloquent
  */
 class Invoice extends Model
 {

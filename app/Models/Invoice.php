@@ -100,4 +100,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Media::class);
     }
+
+    public function consumer()
+    {
+        return $this->belongsTo(Entity::class, 'id', 'consumer_id');
+    }
 }

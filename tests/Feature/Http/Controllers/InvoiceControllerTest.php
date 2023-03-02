@@ -42,7 +42,7 @@ class InvoiceControllerTest extends TestCase
         $init = $this->firstStep();
         $token = $init["token"];
 
-        $this->json('GET', '/api/invoices', [], ["Authorization" => "Bearer $token"])
+        $this->json('GET', '/api/invoices/consumer', [], ["Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
@@ -52,7 +52,7 @@ class InvoiceControllerTest extends TestCase
         $token = $init["token"];
 
 
-        $this->json('GET', '/api/invoices', [], ["Entity-Id" => 10000, "Authorization" => "Bearer $token"])
+        $this->json('GET', '/api/invoices/consumer', [], ["Entity-Id" => 10000, "Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
@@ -175,19 +175,7 @@ class InvoiceControllerTest extends TestCase
             "entity_id" => $consumer->id
         ]);
 
-        $invoice = Invoice::factory()->for($consumer)->create([
-            "consumer_id" => $supplier->id,
-            "supplier_id" => $consumer->id,
-            "user_id" => $user->id,
-            "project_id" => $project->id,
-            "type" => "C",
-            "amount" => 12345678,
-            "currency" => "ARS",
-            "responsible_email" => "test@test.com",
-            "message" => "hola, soy un texto de ejemplo"
-        ]);
-
-        $invoice2 = Invoice::factory()->for($consumer)->create([
+        $invoice = Invoice::factory()->create([
             "consumer_id" => $consumer->id,
             "supplier_id" => $supplier->id,
             "user_id" => $user->id,
@@ -199,7 +187,19 @@ class InvoiceControllerTest extends TestCase
             "message" => "hola, soy un texto de ejemplo"
         ]);
 
-        $this->json('GET', '/api/invoices', ["Entity-Id" => $consumer->id, "Authorization" => "Bearer $token"])
+        $invoice2 = Invoice::factory()->create([
+            "consumer_id" => $supplier->id,
+            "supplier_id" => $consumer->id,
+            "user_id" => $user->id,
+            "project_id" => $project->id,
+            "type" => "C",
+            "amount" => 12345678,
+            "currency" => "ARS",
+            "responsible_email" => "test@test.com",
+            "message" => "hola, soy un texto de ejemplo"
+        ]);
+
+        $this->json('GET', '/api/invoices/consumer', ["Entity-Id" => $consumer->id, "Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_OK);
         // ->assertJson();
     }

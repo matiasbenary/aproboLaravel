@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('payment_order')->default(1);
+            $table->integer('execution_process')->default(1);
+            $table->integer('purchase_order')->default(1);
             $table->foreignId('entity_id')->constrained();
             $table->timestamps();
         });

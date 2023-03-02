@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Media newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media query()
  * @mixin \Eloquent
- *
  * @property int $id
  * @property string $name
  * @property string $file_name
@@ -25,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $size
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereCollection($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereDisk($value)

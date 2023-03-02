@@ -26,6 +26,12 @@ class RegisterClientController extends Controller
         $userAction = new UserCreateAction(UserCreateData::from($request->all()), $entity, true);
         $userAction->execute();
 
-        return response()->json(['message' => ['Client successfully registered']]);
+        $token = auth()->attempt(['email' => $request->email, 'password' => $request->password]);
+
+        return response()->json([
+            'message' => ['Client successfully registered'], 'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+        ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Entity;
+use App\Models\Invoice;
 use App\Models\Permission;
 use App\Models\Project;
 use App\Models\User;
@@ -63,22 +64,22 @@ class InvoiceControllerTest extends TestCase
     public function test_create_invoices_simple()
     {
         $init = $this->firstStep();
-        $entity = $init["entity"];
+        $consumer = $init["entity"];
         $user = $init["user"];
         $token = $init["token"];
 
-        /** @var \App\Models\Entity $entity1 **/
-        $entity1 = Entity::factory()->create();
+        /** @var \App\Models\Entity $supplier **/
+        $supplier = Entity::factory()->create();
 
         /** @var \App\Models\Project $project **/
-        $project = Project::factory()->for($entity)->create([
+        $project = Project::factory()->for($consumer)->create([
             "name" => "Marketing",
-            "entity_id" => $entity->id
+            "entity_id" => $consumer->id
         ]);
 
         $this->json('POST', '/api/invoices', [
-            "consumer_id" => $entity1->id,
-            "supplier_id" => $entity->id,
+            "consumer_id" => $consumer->id,
+            "supplier_id" => $supplier->id,
             "user_id" => $user->id,
             "project_id" => $project->id,
             "type" => "C",
@@ -86,13 +87,13 @@ class InvoiceControllerTest extends TestCase
             "currency" => "ARS",
             "responsible_email" => "test@test.com",
             "message" => "hola, soy un texto de ejemplo"
-        ], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        ], ["Entity-Id" => $consumer->id, "Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
         $this->assertDatabaseHas('invoices', [
-            "consumer_id" => $entity1->id,
-            "supplier_id" => $entity->id,
+            "consumer_id" => $consumer->id,
+            "supplier_id" => $supplier->id,
             "user_id" => $user->id,
             "project_id" => $project->id,
             "type" => "C",
@@ -108,24 +109,24 @@ class InvoiceControllerTest extends TestCase
     public function test_create_invoices_with_file()
     {
         $init = $this->firstStep();
-        $entity = $init["entity"];
+        $consumer = $init["entity"];
         $user = $init["user"];
         $token = $init["token"];
 
         $file = UploadedFile::fake()->image('factura.pdf');
 
-        /** @var \App\Models\Entity $entity1 **/
-        $entity1 = Entity::factory()->create();
+        /** @var \App\Models\Entity $supplier **/
+        $supplier = Entity::factory()->create();
 
         /** @var \App\Models\Project $project **/
-        $project = Project::factory()->for($entity)->create([
+        $project = Project::factory()->for($consumer)->create([
             "name" => "Marketing",
-            "entity_id" => $entity->id
+            "entity_id" => $consumer->id
         ]);
 
         $this->json('POST', '/api/invoices', [
-            "consumer_id" => $entity1->id,
-            "supplier_id" => $entity->id,
+            "consumer_id" => $supplier->id,
+            "supplier_id" => $consumer->id,
             "user_id" => $user->id,
             "project_id" => $project->id,
             "type" => "C",
@@ -134,13 +135,13 @@ class InvoiceControllerTest extends TestCase
             "responsible_email" => "test@test.com",
             "message" => "hola, soy un texto de ejemplo",
             "file" => $file
-        ], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        ], ["Entity-Id" => $consumer->id, "Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
         $this->assertDatabaseHas('invoices', [
-            "consumer_id" => $entity1->id,
-            "supplier_id" => $entity->id,
+            "consumer_id" => $supplier->id,
+            "supplier_id" => $consumer->id,
             "user_id" => $user->id,
             "project_id" => $project->id,
             "type" => "C",
@@ -148,7 +149,6 @@ class InvoiceControllerTest extends TestCase
             "currency" => "ARS",
             "responsible_email" => "test@test.com",
             "message" => "hola, soy un texto de ejemplo",
-            "media_id" => 1
         ]);
 
         Storage::disk()->assertExists('invoices/' . $file->hashName());
@@ -156,5 +156,51 @@ class InvoiceControllerTest extends TestCase
         $this->assertDatabaseCount('media', 1);
 
         $this->assertDatabaseCount('invoices', 1);
+    }
+
+    #    create test show invoices
+    public function test_show_invoices_for_consumer()
+    {
+        $init = $this->firstStep();
+        $consumer = $init["entity"];
+        $user = $init["user"];
+        $token = $init["token"];
+
+        /** @var \App\Models\Entity $supplier **/
+        $supplier = Entity::factory()->create();
+
+        /** @var \App\Models\Project $project **/
+        $project = Project::factory()->for($consumer)->create([
+            "name" => "Marketing",
+            "entity_id" => $consumer->id
+        ]);
+
+        $invoice = Invoice::factory()->for($consumer)->create([
+            "consumer_id" => $supplier->id,
+            "supplier_id" => $consumer->id,
+            "user_id" => $user->id,
+            "project_id" => $project->id,
+            "type" => "C",
+            "amount" => 12345678,
+            "currency" => "ARS",
+            "responsible_email" => "test@test.com",
+            "message" => "hola, soy un texto de ejemplo"
+        ]);
+
+        $invoice2 = Invoice::factory()->for($consumer)->create([
+            "consumer_id" => $consumer->id,
+            "supplier_id" => $supplier->id,
+            "user_id" => $user->id,
+            "project_id" => $project->id,
+            "type" => "C",
+            "amount" => 12345678,
+            "currency" => "ARS",
+            "responsible_email" => "test@test.com",
+            "message" => "hola, soy un texto de ejemplo"
+        ]);
+
+        $this->json('GET', '/api/invoices', ["Entity-Id" => $consumer->id, "Authorization" => "Bearer $token"])
+            ->assertStatus(Response::HTTP_OK);
+        // ->assertJson();
     }
 }

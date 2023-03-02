@@ -19,15 +19,14 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $entityId = $request->header('entity-id');
-        $project = Project::select("id", "name")->where("entity_id", $entityId)->get();
+        $project = Project::where("entity_id", $entityId)->get();
 
         return response()->json(["data" => compact("project")]);
     }
 
     public function store(StoreProjectRequest $request)
     {
-
-        Project::create(["name" => $request->name, "entity_id" => $request->header("entity-id")]);
+        Project::create(["name" => $request->name, "entity_id" => $request->header("entity-id"), "payment_order" => $request->payment_order, "execution_process" => $request->execution_process, "purchase_order" => $request->payment_order]);
         return response()->json(["message" => "Created successfully"]);
     }
 

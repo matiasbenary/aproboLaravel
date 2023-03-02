@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class RegisterEntityControllerTest extends TestCase
+class RegisterClientControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,11 +18,22 @@ class RegisterEntityControllerTest extends TestCase
     {
         $response = $this->postJson('api/registerClient', ['name' => 'test testing', 'business_name' => 'empresa de test', 'email' => 'creacionUser@test.com', 'cuit' => 123456789, 'password' => 'password']); // ['name' => 'test testing', 'business_name' => 'empresa de test', 'email' => 'test@test.com', 'cuit' => 123456789, 'password' => "password"]);
 
-        $response->assertStatus(200)->assertJson(['message' => ['Client successfully registered']]);
+        $response->assertStatus(200)
+            ->assertJson(['message' => ['Client successfully registered']])
+            ->assertJsonStructure([
+                'access_token',
+                'token_type',
+                'expires_in'
+            ]);
         $this->assertDatabaseHas('users', [
             'name' => 'test testing',
             'email' => 'creacionUser@test.com',
             'is_root' => 0,
+        ]);
+
+        $this->assertDatabaseHas('entities', [
+            'business_name' => 'empresa de test',
+            'cuit' => 123456789,
         ]);
     }
 }

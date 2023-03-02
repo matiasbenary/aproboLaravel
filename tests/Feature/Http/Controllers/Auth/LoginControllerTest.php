@@ -48,4 +48,19 @@ class LoginControllerTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    public function test_it_return_token_if_login_is_successful_in_login_with_correct_email_and_password()
+    {
+        $password = 'password';
+        $user = User::factory()->create(['password' => Hash::make($password)]);
+
+        $response = $this->postJson('api/login', ['email' => $user->email, 'password' => $password]);
+        // assert that the response status is 200 OK and token is not null
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'access_token',
+            'token_type',
+            'expires_in'
+        ]);
+    }
 }

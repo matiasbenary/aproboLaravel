@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
- *
  * @method static \Database\Factories\EntityFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Entity newQuery()
@@ -25,18 +24,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereUpdatedAt($value)
  * @mixin \Eloquent
- *
  * @property string $business_name
  * @property string $fantasy_name
  * @property string $email
  * @property int|null $cuit
  * @property int|null $cbu
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereBusinessName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereCbu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereCuit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereFantasyName($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|Entity[] $consumers
+ * @property-read int|null $consumers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Entity[] $suppliers
+ * @property-read int|null $suppliers_count
  */
 class Entity extends Model
 {

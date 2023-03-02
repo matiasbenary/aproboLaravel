@@ -51,5 +51,5 @@ Route::get('suppliers', [SupplierController::class, 'index']);
 Route::post('suppliers', [SupplierController::class, 'store']);
 
 
-Route::get('invoices', [InvoiceController::class, 'index']);
+Route::get('invoices/consumer', [InvoiceController::class, 'consumer']);
 Route::post('invoices', [InvoiceController::class, 'store']);

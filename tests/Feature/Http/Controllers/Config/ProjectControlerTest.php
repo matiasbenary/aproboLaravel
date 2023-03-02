@@ -127,13 +127,16 @@ class ProjectControllerTest extends TestCase
         $token = $init["token"];
 
 
-        $this->json('POST', '/api/projects', ["name" => "test"], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        $this->json('POST', '/api/projects', ["name" => "test", "payment_order" => 2, "execution_process" => 1, "purchase_order" => 2], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
         $this->assertDatabaseHas('projects', [
             'name' => 'test',
-            'entity_id' => $entity->id
+            'entity_id' => $entity->id,
+            "payment_order" => 2,
+            "execution_process" => 1,
+            "purchase_order" => 2
         ]);
 
         $this->assertDatabaseCount('projects', 1);
@@ -159,18 +162,29 @@ class ProjectControllerTest extends TestCase
 
         $project = Project::factory()->for($entity)->create([
             "name" => "Marketing",
-            "entity_id" => $entity->id
+            "entity_id" => $entity->id,
+            "payment_order" => 2,
+            "execution_process" => 1,
+            "purchase_order" => 2
         ]);
 
 
-        $this->json('PUT', '/api/projects/' . (string)$project->id, ["name" => "Comunicaciones"], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        $this->json('PUT', '/api/projects/' . (string)$project->id, [
+            "name" => "Comunicaciones",
+            "payment_order" => 12,
+            "execution_process" => 10,
+            "purchase_order" => 12
+        ], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Updated successfully']);
 
         $this->assertDatabaseHas('projects', [
             'id' => $project->id,
             'name' => 'Comunicaciones',
-            'entity_id' => $entity->id
+            'entity_id' => $entity->id,
+            "payment_order" => 12,
+            "execution_process" => 10,
+            "purchase_order" => 12
         ]);
 
         // $this->assertDatabaseCount('projects', 1);

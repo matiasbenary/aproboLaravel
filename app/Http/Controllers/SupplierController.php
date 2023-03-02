@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entity;
 use App\Models\Supplier;
+use App\Models\Suppliers;
 use Dotenv\Parser\Entry;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -28,7 +29,10 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        Entity::create($request->all());
+        $consumerId = $request->header('entity-id');
+        $supplier = Entity::firstOrCreate(["cuit" => $request->cuit], $request->except("cuit"));
+
+        Suppliers::firstOrCreate(["consumer_id" => $consumerId, "supplier_id" => $supplier->id]);
         return response()->json(["message" => "Created successfully"]);
     }
 

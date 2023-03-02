@@ -24,7 +24,7 @@ class EntityCreateAction implements Actions
      */
     public function execute(): EntityData
     {
-        $entity = EntityData::from(Entity::create($this->entityData->toArray()));
+        $entity = EntityData::from(Entity::firstOrCreate($this->entityData->toArray()));
 
         return $entity;
     }

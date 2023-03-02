@@ -8,6 +8,8 @@ use App\Data\InvoiceCreateData;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
+use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class InvoiceController extends Controller
 {
@@ -18,14 +20,23 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function consumer(Request $request)
     {
-        //
+        $consumerId = $request->header('entity-id');
+        $invoices = QueryBuilder::for(Invoice::where('consumer_id', $consumerId))
+            ->allowedFilters(['name', 'email'])
+            ->jsonPaginate();
+        return response()->json($invoices);
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreInvoiceRequest  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(StoreInvoiceRequest $request)
     {
         if ($request->has("file")) {

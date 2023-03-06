@@ -77,7 +77,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function entities()
     {
-        return $this->belongsToMany(Entity::class)->withPivot('is_owner', 'is_supplier', 'is_admin');
+        return $this->belongsToMany(Entity::class)->withPivot('is_owner');
     }
 
     public function getJWTIdentifier()

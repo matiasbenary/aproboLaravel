@@ -23,7 +23,8 @@ class RegisterClientControllerTest extends TestCase
             ->assertJsonStructure([
                 'access_token',
                 'token_type',
-                'expires_in'
+                'expires_in',
+                'entities'
             ]);
         $this->assertDatabaseHas('users', [
             'name' => 'test testing',

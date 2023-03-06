@@ -60,7 +60,8 @@ class LoginControllerTest extends TestCase
         $response->assertJsonStructure([
             'access_token',
             'token_type',
-            'expires_in'
+            'expires_in',
+            'entities'
         ]);
     }
 }

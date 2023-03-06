@@ -49,6 +49,7 @@ class Entity extends Model
         'business_name',
         'fantasy_name',
         'email',
+        'invitation_token'
     ];
 
     public function users()

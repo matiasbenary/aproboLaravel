@@ -22,6 +22,7 @@ class EntityFactory extends Factory
             'cuit' => fake()->numerify('###########'),
             'cbu' => fake()->numerify('###############'),
             'email' => fake()->unique()->safeEmail(),
+            'invitation_token' => fake()->uuid(),
         ];
     }
 }

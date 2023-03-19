@@ -14,25 +14,44 @@ class ProjectControllerTest extends TestCase
 {
 
     use RefreshDatabase;
-    protected function firstStep()
+
+    protected $entity;
+    protected $token;
+    //add variables here
+    protected $user;
+
+
+    protected function setUp(): void
     {
+        parent::setUp();
+        // $this->artisan('migrate:fresh');
 
         $this->seed();
-        $entity = Entity::factory()->create();
+        $this->entity = Entity::factory()->create();
 
 
         $userF = User::factory()
-            ->hasAttached($entity, [
+            ->hasAttached($this->entity, [
                 'is_owner' => false,
             ])->create([
                 'is_root' => false,
             ]);
 
-        $user = User::find($userF->id);
-        $token = auth()->login($user);
+        $this->user = User::find($userF->id);
+        $this->token = auth()->login($this->user);
+
         $permissionId = Permission::whereName("project")->first()->id;
-        \DB::table("entity_permission_user")->insert(["user_id" => $user->id, "entity_id" => $entity->id, "permission_id" => $permissionId]);
-        return compact("user", "token", "entity");
+        \DB::table("entity_permission_user")->insert(["user_id" => $this->user->id, "entity_id" => $this->entity->id, "permission_id" => $permissionId]);
+
+        Project::factory()->for($this->entity)->create([
+            "name" => "Marketing",
+            "entity_id" => $this->entity->id
+        ]);
+
+        Project::factory()->for($this->entity)->create([
+            "name" => "It",
+            "entity_id" => $this->entity->id
+        ]);
     }
 
     /**
@@ -42,21 +61,7 @@ class ProjectControllerTest extends TestCase
      */
     public function test_get_all_projects()
     {
-        $init = $this->firstStep();
-        $entity = $init["entity"];
-        $token = $init["token"];
-
-        Project::factory()->for($entity)->create([
-            "name" => "Marketing",
-            "entity_id" => $entity->id
-        ]);
-
-        Project::factory()->for($entity)->create([
-            "name" => "It",
-            "entity_id" => $entity->id
-        ]);
-
-        $this->json('GET', '/api/projects', [], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        $this->json('GET', '/api/projects', [], ["Entity-Id" => $this->entity->id, "Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 "data" => [
@@ -77,16 +82,12 @@ class ProjectControllerTest extends TestCase
 
     public function test_get_project()
     {
-        $init = $this->firstStep();
-        $entity = $init["entity"];
-        $token = $init["token"];
-
-        $project = Project::factory()->for($entity)->create([
+        $project = Project::factory()->for($this->entity)->create([
             "name" => "Marketing",
-            "entity_id" => $entity->id
+            "entity_id" => $this->entity->id
         ]);
 
-        $this->json('GET', '/api/projects/' . $project->id, [], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        $this->json('GET', '/api/projects/' . $project->id, [], ["Entity-Id" => $this->entity->id, "Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 "data" => [
@@ -102,67 +103,45 @@ class ProjectControllerTest extends TestCase
 
     public function test_get_all_projects_without_header()
     {
-        $init = $this->firstStep();
-        $token = $init["token"];
-
-        $this->json('GET', '/api/projects', [], ["Authorization" => "Bearer $token"])
+        $this->json('GET', '/api/projects', [], ["Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_projects_with_error_header()
     {
-        $init = $this->firstStep();
-        $token = $init["token"];
-
-
-        $this->json('GET', '/api/projects', [], ["Entity-Id" => 10000, "Authorization" => "Bearer $token"])
+        $this->json('GET', '/api/projects', [], ["Entity-Id" => 10000, "Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_create_project()
     {
-        $init = $this->firstStep();
-        $entity = $init["entity"];
-        $user = $init["user"];
-        $token = $init["token"];
-
-
-        $this->json('POST', '/api/projects', ["name" => "test", "payment_order" => 2, "execution_process" => 1, "purchase_order" => 2], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        $this->json('POST', '/api/projects', ["name" => "test", "payment_order" => 2, "execution_process" => 1, "purchase_order" => 2], ["Entity-Id" => $this->entity->id, "Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
         $this->assertDatabaseHas('projects', [
             'name' => 'test',
-            'entity_id' => $entity->id,
+            'entity_id' => $this->entity->id,
             "payment_order" => 2,
             "execution_process" => 1,
             "purchase_order" => 2
         ]);
 
-        $this->assertDatabaseCount('projects', 1);
+        $this->assertDatabaseCount('projects', 3);
     }
 
     public function test_create_project_without_params()
     {
-        $init = $this->firstStep();
-        $entity = $init["entity"];
-        $token = $init["token"];
-
-        $this->json('POST', '/api/projects', [], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        $this->json('POST', '/api/projects', [], ["Entity-Id" => $this->entity->id, "Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(['name' => ['The name field is required.']]);
     }
 
     public function test_edit_project()
     {
-        $init = $this->firstStep();
-        $entity = $init["entity"];
-        $user = $init["user"];
-        $token = $init["token"];
-
-        $project = Project::factory()->for($entity)->create([
+        $project = Project::factory()->for($this->entity)->create([
             "name" => "Marketing",
-            "entity_id" => $entity->id,
+            "entity_id" => $this->entity->id,
             "payment_order" => 2,
             "execution_process" => 1,
             "purchase_order" => 2
@@ -174,19 +153,19 @@ class ProjectControllerTest extends TestCase
             "payment_order" => 12,
             "execution_process" => 10,
             "purchase_order" => 12
-        ], ["Entity-Id" => $entity->id, "Authorization" => "Bearer $token"])
+        ], ["Entity-Id" => $this->entity->id, "Authorization" => "Bearer " . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Updated successfully']);
 
         $this->assertDatabaseHas('projects', [
             'id' => $project->id,
             'name' => 'Comunicaciones',
-            'entity_id' => $entity->id,
+            'entity_id' => $this->entity->id,
             "payment_order" => 12,
             "execution_process" => 10,
             "purchase_order" => 12
         ]);
 
-        // $this->assertDatabaseCount('projects', 1);
+        $this->assertDatabaseCount('projects', 3);
     }
 }

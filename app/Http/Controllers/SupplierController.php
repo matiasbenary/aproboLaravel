@@ -35,11 +35,6 @@ class SupplierController extends Controller
         $supplier = $entityAction->execute();
 
         Suppliers::firstOrCreate(['consumer_id' => $consumerId, 'supplier_id' => $supplier->id]);
-        info('check');
-        info(Suppliers::all()->toArray());
-        info($supplier->id);
-        info($consumerId);
-        info('created');
 
         return response()->json(['message' => 'Created successfully']);
     }

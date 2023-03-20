@@ -56,30 +56,25 @@ class SupplierControllerTest extends TestCase
         /** @var \App\Models\Entity $this->supplier2 * */
         $this->supplier2 = Entity::factory()->create();
 
-        /** @var \App\Models\Entity $this->supplier1 * */
-        $this->supplier1 = Entity::factory()->create();
-        /** @var \App\Models\Entity $this->supplier2 * */
-        $this->supplier2 = Entity::factory()->create();
-
         \DB::table('suppliers')->insert(['consumer_id' => $this->consumer->id, 'supplier_id' => $this->supplier1->id]);
         \DB::table('suppliers')->insert(['consumer_id' => $this->consumer->id, 'supplier_id' => $this->supplier2->id]);
     }
 
     public function test_get_all_suppliers_without_header()
     {
-        $this->json('GET', '/api/suppliers', [], ['Authorization' => 'Bearer '.$this->token])
+        $this->json('GET', '/api/suppliers', [], ['Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_suppliers_with_error_header()
     {
-        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer '.$this->token])
+        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_suppliers()
     {
-        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
@@ -108,7 +103,7 @@ class SupplierControllerTest extends TestCase
 
     public function test_create_supplier()
     {
-        $this->json('POST', '/api/suppliers', ['business_name' => 'test', 'fantasy_name' => 'test', 'email' => 'supplier@test.com', 'cuit' => 12345678, 'cbu' => 12345678], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        $this->json('POST', '/api/suppliers', ['business_name' => 'test', 'fantasy_name' => 'test', 'email' => 'supplier@test.com', 'cuit' => 12345678, 'cbu' => 12345678], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -124,7 +119,7 @@ class SupplierControllerTest extends TestCase
             'consumer_id' => $this->consumer->id,
         ]);
 
-        $this->assertDatabaseCount('entities', 6);
+        $this->assertDatabaseCount('entities', 4);
     }
 
     public function test_create_existing_supplier()
@@ -135,7 +130,7 @@ class SupplierControllerTest extends TestCase
             'email' => $this->supplier1->email,
             'cuit' => $this->supplier1->cuit,
             'cbu' => $this->supplier1->cbu,
-        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -157,7 +152,7 @@ class SupplierControllerTest extends TestCase
             'email' => $this->supplier1->email,
             'cuit' => $this->supplier1->cuit,
             'cbu' => $this->supplier1->cbu,
-        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 

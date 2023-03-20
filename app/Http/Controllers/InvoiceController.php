@@ -51,7 +51,7 @@ class InvoiceController extends Controller
 
         $invoiceCreateAction = new InvoiceCreateAction($invoiceData);
         $invoiceCreateAction->execute();
-        // info(Invoice::all()->toArray());
+
         return response()->json(['message' => 'Created successfully']);
     }
 

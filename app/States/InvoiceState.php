@@ -2,6 +2,11 @@
 
 namespace App\States;
 
+use App\States\InvoiceState\Cancelled;
+use App\States\InvoiceState\Completed;
+use App\States\InvoiceState\ExecutionProcess;
+use App\States\InvoiceState\PaymentOrder;
+use App\States\InvoiceState\PurchaseOrder;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 

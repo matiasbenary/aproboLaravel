@@ -21,6 +21,13 @@ class InvoiceState extends State
             ->allowTransition(ExecutionProcess::class, PaymentOrder::class)
             ->allowTransition(ExecutionProcess::class, Cancelled::class)
             ->allowTransition(PaymentOrder::class, Completed::class)
-            ->allowTransition(PaymentOrder::class, Cancelled::class);
+            ->allowTransition(PaymentOrder::class, Cancelled::class)
+            ->registerState([
+                PurchaseOrder::class,
+                ExecutionProcess::class,
+                PaymentOrder::class,
+                Completed::class,
+                Cancelled::class,
+            ]);
     }
 }

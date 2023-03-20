@@ -31,11 +31,15 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $consumerId = $request->header('entity-id');
-        info($request->all());
         $entityAction = new EntityCreateAction(EntityCreateData::from($request->all()));
         $supplier = $entityAction->execute();
 
         Suppliers::firstOrCreate(['consumer_id' => $consumerId, 'supplier_id' => $supplier->id]);
+        info('check');
+        info(Suppliers::all()->toArray());
+        info($supplier->id);
+        info($consumerId);
+        info('created');
 
         return response()->json(['message' => 'Created successfully']);
     }

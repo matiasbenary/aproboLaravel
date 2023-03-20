@@ -4,8 +4,9 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Entity;
 use App\Models\Permission;
+use App\Models\Supplier;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -15,79 +16,89 @@ class SupplierControllerTest extends TestCase
     //Send email to new supplier
     //Validate Create
 
-    // use  DatabaseTransactions;
-    protected function firstStep()
-    {
-        // $this->artisan('migrate:fresh');
-        $this->seed();
-        $entity = Entity::factory()->create();
+    use RefreshDatabase;
 
-        /** @var \App\Models\User $userF * */
+    protected $token;
+
+    protected $user;
+
+    protected $consumer;
+
+    protected $supplier1;
+
+    protected $supplier2;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('migrate:fresh');
+        $this->seed();
+
+        /** @var \App\Models\Entity $this->consumer * */
+        $this->consumer = Entity::factory()->create();
+
         $userF = User::factory()
-            ->hasAttached($entity, [
+            ->hasAttached($this->consumer, [
                 'is_owner' => false,
             ])->create([
                 'is_root' => false,
             ]);
-        /** @var \App\Models\User $user * */
-        $user = User::find($userF->id);
-        $token = auth()->login($user);
-        $permissionId = Permission::whereName('supplier')->first()->id;
-        \DB::table('entity_permission_user')->insert(['user_id' => $user->id, 'entity_id' => $entity->id, 'permission_id' => $permissionId]);
 
-        return compact('user', 'token', 'entity');
+        $this->user = User::find($userF->id);
+        $this->token = auth()->login($this->user);
+
+        $permissionId = Permission::whereName('supplier')->first()->id;
+        \DB::table('entity_permission_user')->insert(['user_id' => $this->user->id, 'entity_id' => $this->consumer->id, 'permission_id' => $permissionId]);
+
+        /** @var \App\Models\Entity $this->supplier1 * */
+        $this->supplier1 = Entity::factory()->create();
+
+        /** @var \App\Models\Entity $this->supplier2 * */
+        $this->supplier2 = Entity::factory()->create();
+
+        /** @var \App\Models\Entity $this->supplier1 * */
+        $this->supplier1 = Entity::factory()->create();
+        /** @var \App\Models\Entity $this->supplier2 * */
+        $this->supplier2 = Entity::factory()->create();
+
+        \DB::table('suppliers')->insert(['consumer_id' => $this->consumer->id, 'supplier_id' => $this->supplier1->id]);
+        \DB::table('suppliers')->insert(['consumer_id' => $this->consumer->id, 'supplier_id' => $this->supplier2->id]);
     }
 
     public function test_get_all_suppliers_without_header()
     {
-        $init = $this->firstStep();
-        $token = $init['token'];
-
-        $this->json('GET', '/api/suppliers', [], ['Authorization' => "Bearer $token"])
+        $this->json('GET', '/api/suppliers', [], ['Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_suppliers_with_error_header()
     {
-        $init = $this->firstStep();
-        $token = $init['token'];
-
-        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => 10000, 'Authorization' => "Bearer $token"])
+        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_suppliers()
     {
-        $init = $this->firstStep();
-        $entity = $init['entity'];
-        $token = $init['token'];
-        /** @var \App\Models\Entity $entity1 * */
-        $entity1 = Entity::factory()->create();
-        /** @var \App\Models\Entity $entity2 * */
-        $entity2 = Entity::factory()->create();
-
-        \DB::table('suppliers')->insert(['consumer_id' => $entity->id, 'supplier_id' => $entity1->id]);
-        \DB::table('suppliers')->insert(['consumer_id' => $entity->id, 'supplier_id' => $entity2->id]);
-        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => $entity->id, 'Authorization' => "Bearer $token"])
+        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
                     'supplier' => [
                         [
-                            'id' => $entity1->id,
-                            'business_name' => $entity1->business_name,
-                            'fantasy_name' => $entity1->fantasy_name,
-                            'email' => $entity1->email,
-                            'cuit' => $entity1->cuit,
-                            'cbu' => $entity1->cbu,
+                            'id' => $this->supplier1->id,
+                            'business_name' => $this->supplier1->business_name,
+                            'fantasy_name' => $this->supplier1->fantasy_name,
+                            'email' => $this->supplier1->email,
+                            'cuit' => $this->supplier1->cuit,
+                            'cbu' => $this->supplier1->cbu,
                         ],
                         [
-                            'id' => $entity2->id,
-                            'business_name' => $entity2->business_name,
-                            'fantasy_name' => $entity2->fantasy_name,
-                            'email' => $entity2->email,
-                            'cuit' => $entity2->cuit,
-                            'cbu' => $entity2->cbu,
+                            'id' => $this->supplier2->id,
+                            'business_name' => $this->supplier2->business_name,
+                            'fantasy_name' => $this->supplier2->fantasy_name,
+                            'email' => $this->supplier2->email,
+                            'cuit' => $this->supplier2->cuit,
+                            'cbu' => $this->supplier2->cbu,
                         ],
                     ],
                 ],
@@ -97,12 +108,7 @@ class SupplierControllerTest extends TestCase
 
     public function test_create_supplier()
     {
-        $init = $this->firstStep();
-        $entity = $init['entity'];
-        $user = $init['user'];
-        $token = $init['token'];
-
-        $this->json('POST', '/api/suppliers', ['business_name' => 'test', 'fantasy_name' => 'test', 'email' => 'supplier@test.com', 'cuit' => 12345678, 'cbu' => 12345678], ['Entity-Id' => $entity->id, 'Authorization' => "Bearer $token"])
+        $this->json('POST', '/api/suppliers', ['business_name' => 'test', 'fantasy_name' => 'test', 'email' => 'supplier@test.com', 'cuit' => 12345678, 'cbu' => 12345678], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -115,67 +121,51 @@ class SupplierControllerTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('suppliers', [
-            'consumer_id' => $entity->id,
+            'consumer_id' => $this->consumer->id,
         ]);
 
-        $this->assertDatabaseCount('entities', 9);
+        $this->assertDatabaseCount('entities', 6);
     }
 
-    // public function test_create_existing_supplier()
-    // {
-    //     $init = $this->firstStep();
-    //     $consumer = $init['entity'];
-    //     $user = $init['user'];
-    //     $token = $init['token'];
+    public function test_create_existing_supplier()
+    {
+        $this->json('POST', '/api/suppliers', [
+            'business_name' => $this->supplier1->business_name,
+            'fantasy_name' => $this->supplier1->fantasy_name,
+            'email' => $this->supplier1->email,
+            'cuit' => $this->supplier1->cuit,
+            'cbu' => $this->supplier1->cbu,
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJson(['message' => 'Created successfully']);
 
-    //     /** @var \App\Models\Entity $supplier * */
-    //     $supplier = Entity::factory()->create();
+        $this->assertDatabaseHas('suppliers', [
+            'consumer_id' => $this->consumer->id,
+            'supplier_id' => $this->supplier1->id,
+        ]);
 
-    //     $this->json('POST', '/api/suppliers', [
-    //         'business_name' => $supplier->business_name,
-    //         'fantasy_name' => $supplier->fantasy_name,
-    //         'email' => $supplier->email,
-    //         'cuit' => $supplier->cuit,
-    //         'cbu' => $supplier->cbu,
-    //     ], ['Entity-Id' => $consumer->id, 'Authorization' => "Bearer $token"])
-    //         ->assertStatus(Response::HTTP_OK)
-    //         ->assertJson(['message' => 'Created successfully']);
+        $this->assertDatabaseCount('suppliers', 3);
+    }
 
-    //     $this->assertDatabaseHas('suppliers', [
-    //         'consumer_id' => $consumer->id,
-    //         'supplier_id' => $supplier->id,
-    //     ]);
+    public function test_create_existing_relationship_supplier()
+    {
+        \DB::table('suppliers')->insert(['consumer_id' => $this->consumer->id, 'supplier_id' => $this->supplier1->id]);
 
-    //     $this->assertDatabaseCount('suppliers', 1);
-    // }
+        $this->json('POST', '/api/suppliers', [
+            'business_name' => $this->supplier1->business_name,
+            'fantasy_name' => $this->supplier1->fantasy_name,
+            'email' => $this->supplier1->email,
+            'cuit' => $this->supplier1->cuit,
+            'cbu' => $this->supplier1->cbu,
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJson(['message' => 'Created successfully']);
 
-    // public function test_create_existing_relationship_supplier()
-    // {
-    //     $init = $this->firstStep();
-    //     $consumer = $init['entity'];
-    //     $user = $init['user'];
-    //     $token = $init['token'];
+        $this->assertDatabaseHas('suppliers', [
+            'consumer_id' => $this->consumer->id,
+            'supplier_id' => $this->supplier1->id,
+        ]);
 
-    //     /** @var \App\Models\Entity $supplier * */
-    //     $supplier = Entity::factory()->create();
-
-    //     \DB::table('suppliers')->insert(['consumer_id' => $consumer->id, 'supplier_id' => $supplier->id]);
-
-    //     $this->json('POST', '/api/suppliers', [
-    //         'business_name' => $supplier->business_name,
-    //         'fantasy_name' => $supplier->fantasy_name,
-    //         'email' => $supplier->email,
-    //         'cuit' => $supplier->cuit,
-    //         'cbu' => $supplier->cbu,
-    //     ], ['Entity-Id' => $consumer->id, 'Authorization' => "Bearer $token"])
-    //         ->assertStatus(Response::HTTP_OK)
-    //         ->assertJson(['message' => 'Created successfully']);
-
-    //     $this->assertDatabaseHas('suppliers', [
-    //         'consumer_id' => $consumer->id,
-    //         'supplier_id' => $supplier->id,
-    //     ]);
-
-    //     $this->assertDatabaseCount('suppliers', 1);
-    // }
+        $this->assertDatabaseCount('suppliers', 4);
+    }
 }

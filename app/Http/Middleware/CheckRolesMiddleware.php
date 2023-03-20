@@ -16,8 +16,6 @@ class CheckRolesMiddleware
     public function handle(Request $request, Closure $next)
     {
         $token = $request->bearerToken();
-        info('token');
-        info($token);
 
         return $next($request);
     }

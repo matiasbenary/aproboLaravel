@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Actions\EntityCreateAction;
 use App\Actions\UserCreateAction;
 use App\Data\EntityCreateData;
-use App\Data\EntityData;
 use App\Data\UserCreateData;
 use App\Http\Controllers\Controller;
 use App\Models\Entity;

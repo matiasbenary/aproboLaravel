@@ -18,18 +18,17 @@ class RegisterClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request): JsonResponse
     {
         $entityAction = new EntityCreateAction(EntityCreateData::from($request->all()));
-        $entity = EntityData::from($entityAction->execute());
+        $entity = $entityAction->execute();
         $userAction = new UserCreateAction(UserCreateData::from($request->all()), $entity, true);
         $userAction->execute();
 
-        if ($request->has("invitation_token") && $client = Entity::where("invitation_token", $request->invitation_token)->first()) {
-            Suppliers::firstOrCreate(["consumer_id" => $client->id, "supplier_id" => $entity->id]);
+        if ($request->has('invitation_token') && $client = Entity::where('invitation_token', $request->invitation_token)->first()) {
+            Suppliers::firstOrCreate(['consumer_id' => $client->id, 'supplier_id' => $entity->id]);
         }
 
         $token = auth()->attempt(['email' => $request->email, 'password' => $request->password]);

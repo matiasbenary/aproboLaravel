@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Media newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media query()
+ *
  * @property int $id
  * @property string $name
  * @property string $file_name
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $size
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereCollection($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereDisk($value)
@@ -34,11 +36,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Media wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Media extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'file_name',
@@ -48,6 +52,6 @@ class Media extends Model
         'collection',
         'state',
         'signatures',
-        'size'
+        'size',
     ];
 }

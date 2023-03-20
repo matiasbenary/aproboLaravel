@@ -34,13 +34,13 @@ class MediaUploadAction
         Storage::put($path, $file);
 
         $media = Media::create([
-            "name" => "{$name}",
-            "file_name" => $file->getClientOriginalName(),
-            "mime_type" => $file->getClientMimeType(),
-            "path" => $path,
-            "file_hash" => md5_file($file->getRealPath()),
-            "collection" => $collection,
-            "size" => $file->getSize()
+            'name' => "{$name}",
+            'file_name' => $file->getClientOriginalName(),
+            'mime_type' => $file->getClientMimeType(),
+            'path' => $path,
+            'file_hash' => md5_file($file->getRealPath()),
+            'collection' => $collection,
+            'size' => $file->getSize(),
         ]);
 
         return $media;

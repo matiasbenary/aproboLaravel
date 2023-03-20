@@ -4,13 +4,14 @@ namespace Tests\Unit\Actions;
 
 use App\Actions\MediaUploadAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class MediaUploadActionTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *
@@ -24,7 +25,7 @@ class MediaUploadActionTest extends TestCase
 
         $action->execute($file, 'avatars');
 
-        Storage::disk()->assertExists('avatars/' . $file->hashName());
+        Storage::disk()->assertExists('avatars/'.$file->hashName());
 
         $this->assertDatabaseCount('media', 1);
     }

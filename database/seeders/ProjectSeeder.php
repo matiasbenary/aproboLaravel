@@ -14,6 +14,6 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(["name" => "project", "description" => "CRUD project"]);
+        Permission::create(['name' => 'project', 'description' => 'CRUD project']);
     }
 }

@@ -56,9 +56,8 @@ class DatabaseSeeder extends Seeder
         //         'is_root' => false,
         //     ]);
 
-
         $this->call(PermissionSeeder::class);
-        # create a invoice
+        // create a invoice
         // 'consumer_id',
         // 'supplier_id',
         // 'user_id',

@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('checkEmail', [LoginController::class, 'checkEmail']);
-Route::post('login', [LoginController::class, 'login'])->name("login");
+Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::post('logout', [LoginController::class, 'logout']);
 Route::post('refresh', [LoginController::class, 'refresh']);
 Route::post('me', [LoginController::class, 'me']);
@@ -46,10 +46,8 @@ Route::get('projects/{project}', [ProjectController::class, 'show']);
 Route::post('projects', [ProjectController::class, 'store']);
 Route::put('projects/{project}', [ProjectController::class, 'update']);
 
-
 Route::get('suppliers', [SupplierController::class, 'index']);
 Route::post('suppliers', [SupplierController::class, 'store']);
-
 
 Route::get('invoices/consumer', [InvoiceController::class, 'consumer']);
 Route::post('invoices', [InvoiceController::class, 'store']);

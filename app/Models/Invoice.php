@@ -14,6 +14,7 @@ use Spatie\ModelStates\HasStates;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice query()
+ *
  * @property int $id
  * @property int $user_id
  * @property int $contract_id
@@ -33,6 +34,7 @@ use Spatie\ModelStates\HasStates;
  * @property-read int|null $projects_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice orWhereNotState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice orWhereState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereAmount($value)
@@ -48,14 +50,17 @@ use Spatie\ModelStates\HasStates;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUserId($value)
+ *
  * @property int $consumer_id
  * @property int $supplier_id
  * @property string $responsible_email
  * @property string $message
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereConsumerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereResponsibleEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereSupplierId($value)
+ *
  * @mixin \Eloquent
  */
 class Invoice extends Model
@@ -75,7 +80,7 @@ class Invoice extends Model
         'signatures',
         'responsible_email',
         'message',
-        'currency'
+        'currency',
     ];
 
     protected $casts = [

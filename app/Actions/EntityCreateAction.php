@@ -22,10 +22,8 @@ class EntityCreateAction implements Actions
      *
      * @return mixed
      */
-    public function execute(): EntityData
+    public function execute()
     {
-        $entity = EntityData::from(Entity::firstOrCreate($this->entityData->toArray()));
-
-        return $entity;
+        return EntityData::from(Entity::firstOrCreate($this->entityData->toArray()));
     }
 }

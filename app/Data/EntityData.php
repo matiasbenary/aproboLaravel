@@ -12,8 +12,9 @@ class EntityData extends Data
         public string $business_name,
         public string $email,
         public int $cuit,
+        public string|Optional $invitation_token,
         public string|Optional $fantasy_name,
-        public int|Optional $cbu,
+        public int|Optional|null $cbu,
     ) {
     }
 }

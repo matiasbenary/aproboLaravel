@@ -20,6 +20,7 @@ class EntityCreateActionTest extends TestCase
             'fantasy_name' => 'fantasy',
             'cuit' => 123456789,
             'email' => 'test@test.com',
+            'cbu' => 9876543211234,
         ]);
     }
 

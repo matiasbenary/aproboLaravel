@@ -14,7 +14,7 @@ class EntityCreateData extends Data
         public int $cuit,
         public string $invitation_token,
         public string|Optional $fantasy_name,
-        public int|Optional $cbu,
+        public int|Optional|null $cbu,
     ) {
     }
 
@@ -23,9 +23,10 @@ class EntityCreateData extends Data
         string $email,
         int $cuit,
         string|Optional $fantasy_name,
-        string|Optional $cbu
+        string|Optional $cbu,
     ): self {
         $invitation_token = Str::uuid()->toString();
+
         return new self($business_name, $email, $cuit, $invitation_token, $fantasy_name ?? $business_name, $cbu);
     }
 
@@ -33,6 +34,8 @@ class EntityCreateData extends Data
         array $data
     ): self {
         $invitation_token = Str::uuid()->toString();
-        return new self($data['business_name'], $data['email'], $data['cuit'], $invitation_token, $data['fantasy_name'] ?? $data['business_name'], array_key_exists('cbu', $data) ?? null);
+        $cbu = array_key_exists('cbu', $data) ? $data['cbu'] : null;
+
+        return new self($data['business_name'], $data['email'], $data['cuit'], $invitation_token, $data['fantasy_name'] ?? $data['business_name'], $cbu);
     }
 }

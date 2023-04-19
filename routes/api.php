@@ -48,6 +48,7 @@ Route::put('projects/{project}', [ProjectController::class, 'update']);
 
 Route::get('suppliers', [SupplierController::class, 'index']);
 Route::post('suppliers', [SupplierController::class, 'store']);
+Route::post('suppliers/sendInvitation', [SupplierController::class, 'sendInvitation']);
 
 Route::get('invoices/consumer', [InvoiceController::class, 'consumer']);
 Route::post('invoices', [InvoiceController::class, 'store']);

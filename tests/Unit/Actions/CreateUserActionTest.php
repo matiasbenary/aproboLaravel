@@ -6,12 +6,20 @@ use App\Actions\UserCreateAction;
 use App\Data\EntityData;
 use App\Data\UserCreateData;
 use App\Models\Entity;
+use App\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CreateUserActionTest extends TestCase
 {
     use RefreshDatabase;
+
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
 
     protected function getUser(): UserCreateData
     {
@@ -20,6 +28,7 @@ class CreateUserActionTest extends TestCase
 
     public function test_add_new_user()
     {
+        $permission = Permission::count();
         $entity = EntityData::from(Entity::factory()->create());
 
         $userData = $this->getUser();
@@ -38,6 +47,8 @@ class CreateUserActionTest extends TestCase
             'entity_id' => $entity->id,
             'is_owner' => false,
         ]);
+
+        $this->assertDatabaseCount('entity_permission_user', $permission);
     }
 
     public function test_add_new_user_owner()

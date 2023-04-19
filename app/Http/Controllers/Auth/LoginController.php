@@ -25,7 +25,7 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -45,6 +45,7 @@ class LoginController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'entities' => auth()->user()->entities,
+            'user' => auth()->user(),
         ]);
     }
 

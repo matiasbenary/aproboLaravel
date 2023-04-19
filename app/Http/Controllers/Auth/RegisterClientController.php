@@ -37,6 +37,7 @@ class RegisterClientController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'entities' => auth()->user()->entities,
+            'user' => auth()->user(),
         ]);
     }
 }

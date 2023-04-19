@@ -4,7 +4,6 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Entity;
 use App\Models\Permission;
-use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
@@ -162,5 +161,18 @@ class SupplierControllerTest extends TestCase
         ]);
 
         $this->assertDatabaseCount('suppliers', 4);
+    }
+
+
+    public function test_send_invite_email_incorrect()
+    {
+        $this->json('POST', '/api/suppliers/sendInvitation', ['email' => "pepe"], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+    public function test_send_invite_email()
+    {
+        $this->json('POST', '/api/suppliers/sendInvitation', ['email' => "pepe@test.com"], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJson(['message' => 'Invitation sent successfully']);
     }
 }

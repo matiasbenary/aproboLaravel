@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\EntityCreateAction;
 use App\Data\EntityCreateData;
+use App\Data\SupllierInviteEmailData;
 use App\Models\Entity;
 use App\Models\Supplier;
 use App\Models\Suppliers;
@@ -67,5 +68,10 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         //
+    }
+
+    public function sendInvitation(SupllierInviteEmailData $email)
+    {
+        return response()->json(['message' => 'Invitation sent successfully']);
     }
 }

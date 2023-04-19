@@ -62,6 +62,7 @@ class LoginControllerTest extends TestCase
             'token_type',
             'expires_in',
             'entities',
+            'user'
         ]);
     }
 }

@@ -63,19 +63,19 @@ class SupplierControllerTest extends TestCase
 
     public function test_get_all_suppliers_without_header()
     {
-        $this->json('GET', '/api/suppliers', [], ['Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/suppliers', [], ['Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_suppliers_with_error_header()
     {
-        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_suppliers()
     {
-        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/suppliers', [], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
@@ -104,7 +104,7 @@ class SupplierControllerTest extends TestCase
 
     public function test_create_supplier()
     {
-        $this->json('POST', '/api/suppliers', ['business_name' => 'test', 'fantasy_name' => 'test', 'email' => 'supplier@test.com', 'cuit' => 12345678, 'cbu' => 12345678], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('POST', '/api/suppliers', ['business_name' => 'test', 'fantasy_name' => 'test', 'email' => 'supplier@test.com', 'cuit' => 12345678, 'cbu' => 12345678], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -131,7 +131,7 @@ class SupplierControllerTest extends TestCase
             'email' => $this->supplier1->email,
             'cuit' => $this->supplier1->cuit,
             'cbu' => $this->supplier1->cbu,
-        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -153,7 +153,7 @@ class SupplierControllerTest extends TestCase
             'email' => $this->supplier1->email,
             'cuit' => $this->supplier1->cuit,
             'cbu' => $this->supplier1->cbu,
-        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -165,22 +165,22 @@ class SupplierControllerTest extends TestCase
         $this->assertDatabaseCount('suppliers', 4);
     }
 
-
     public function test_send_invite_email_incorrect()
     {
-        $this->json('POST', '/api/suppliers/sendInvitation', ['email' => "pepe"], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('POST', '/api/suppliers/sendInvitation', ['email' => 'pepe'], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     public function test_send_invite_email()
     {
         Mail::fake();
 
-        $this->json('POST', '/api/suppliers/sendInvitation', ['email' => "pepe@test.com"], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('POST', '/api/suppliers/sendInvitation', ['email' => 'pepe@test.com'], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Invitation sent successfully']);
 
         Mail::assertSent(SendInvitationSupplier::class, function ($mail) {
-            return $mail->hasTo("pepe@test.com");
+            return $mail->hasTo('pepe@test.com');
         });
     }
 }

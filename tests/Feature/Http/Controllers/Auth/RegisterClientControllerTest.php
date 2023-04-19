@@ -26,7 +26,7 @@ class RegisterClientControllerTest extends TestCase
                 'token_type',
                 'expires_in',
                 'entities',
-                'user'
+                'user',
             ]);
 
         $this->assertDatabaseHas('users', [
@@ -53,7 +53,7 @@ class RegisterClientControllerTest extends TestCase
                 'token_type',
                 'expires_in',
                 'entities',
-                'user'
+                'user',
             ]);
         $this->assertDatabaseHas('users', [
             'name' => 'test testing',

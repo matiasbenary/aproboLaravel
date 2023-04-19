@@ -11,7 +11,7 @@ class EntityPermissionMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->hasHeader('entity-id')) {
+        if (! $request->hasHeader('entity-id')) {
             return response()->json(['status' => 'the Entity-Id is missing in the header'], Response::HTTP_UNAUTHORIZED);
         }
 
@@ -21,7 +21,7 @@ class EntityPermissionMiddleware
             ->where('user_id', auth()->payload()->get('sub'))
             ->first();
 
-        if (!$checkPermission) {
+        if (! $checkPermission) {
             return response()->json(['status' => 'you do not have permissions'], Response::HTTP_UNAUTHORIZED);
         }
 

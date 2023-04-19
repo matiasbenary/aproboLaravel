@@ -14,6 +14,7 @@ class SendInvitationSupplier extends Mailable
     use Queueable, SerializesModels;
 
     protected $entity;
+
     /**
      * Create a new message instance.
      *

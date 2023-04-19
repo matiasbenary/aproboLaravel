@@ -76,6 +76,7 @@ class SupplierController extends Controller
     {
         $entity = getEntity();
         Mail::to($supplier->email)->send(new SendInvitationSupplier($entity));
+
         return response()->json(['message' => 'Invitation sent successfully']);
     }
 }

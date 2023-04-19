@@ -22,7 +22,7 @@ class UserCreateAction implements Actions
         $permissions = Permission::all();
 
         foreach ($permissions as $permission) {
-            $user->permissions()->attach($permission->id, ['entity_id' => $this->entityData->id,]);
+            $user->permissions()->attach($permission->id, ['entity_id' => $this->entityData->id]);
         }
 
         return UserData::from($user);

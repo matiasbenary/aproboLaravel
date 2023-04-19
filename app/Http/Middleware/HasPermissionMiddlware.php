@@ -25,7 +25,7 @@ class HasPermissionMiddlware
         $permissionId = $this->getPermissionId($role);
         $checkPermission = $this->checkPermission($permissionId, $request);
 
-        if (!$checkPermission) {
+        if (! $checkPermission) {
             return response()->json(['status' => 'you do not have permissions'], Response::HTTP_UNAUTHORIZED);
         }
 

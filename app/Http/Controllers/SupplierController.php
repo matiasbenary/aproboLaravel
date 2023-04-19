@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Actions\EntityCreateAction;
 use App\Data\EntityCreateData;
 use App\Data\SupllierInviteEmailData;
+use App\Mail\SendInvitationSupplier;
 use App\Models\Entity;
 use App\Models\Supplier;
 use App\Models\Suppliers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Mail;
 
 class SupplierController extends Controller
 {
@@ -70,8 +72,10 @@ class SupplierController extends Controller
         //
     }
 
-    public function sendInvitation(SupllierInviteEmailData $email)
+    public function sendInvitation(SupllierInviteEmailData $supplier)
     {
+        $entity = getEntity();
+        Mail::to($supplier->email)->send(new SendInvitationSupplier($entity));
         return response()->json(['message' => 'Invitation sent successfully']);
     }
 }

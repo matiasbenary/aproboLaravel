@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Mail\SendInvitationSupplier;
 use App\Models\Entity;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
+use Mail;
 use Tests\TestCase;
 
 class SupplierControllerTest extends TestCase
@@ -171,8 +173,14 @@ class SupplierControllerTest extends TestCase
     }
     public function test_send_invite_email()
     {
+        Mail::fake();
+
         $this->json('POST', '/api/suppliers/sendInvitation', ['email' => "pepe@test.com"], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Invitation sent successfully']);
+
+        Mail::assertSent(SendInvitationSupplier::class, function ($mail) {
+            return $mail->hasTo("pepe@test.com");
+        });
     }
 }

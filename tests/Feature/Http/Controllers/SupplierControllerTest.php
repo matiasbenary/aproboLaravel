@@ -13,10 +13,6 @@ use Tests\TestCase;
 
 class SupplierControllerTest extends TestCase
 {
-    //TODO:
-    //Send email to new supplier
-    //Validate Create
-
     use RefreshDatabase;
 
     protected $token;

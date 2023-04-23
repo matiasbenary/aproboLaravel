@@ -60,7 +60,7 @@ class ProjectControllerTest extends TestCase
      */
     public function test_get_all_projects()
     {
-        $this->json('GET', '/api/projects', [], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/projects', [], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
@@ -86,7 +86,7 @@ class ProjectControllerTest extends TestCase
             'entity_id' => $this->entity->id,
         ]);
 
-        $this->json('GET', '/api/projects/' . $project->id, [], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/projects/'.$project->id, [], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
@@ -101,19 +101,19 @@ class ProjectControllerTest extends TestCase
 
     public function test_get_all_projects_without_header()
     {
-        $this->json('GET', '/api/projects', [], ['Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/projects', [], ['Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_projects_with_error_header()
     {
-        $this->json('GET', '/api/projects', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/projects', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_create_project()
     {
-        $this->json('POST', '/api/projects', ['name' => 'test', 'payment_order' => 2, 'execution_process' => 1, 'purchase_order' => 2], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('POST', '/api/projects', ['name' => 'test', 'payment_order' => 2, 'execution_process' => 1, 'purchase_order' => 2], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -130,7 +130,7 @@ class ProjectControllerTest extends TestCase
 
     public function test_create_project_without_params()
     {
-        $this->json('POST', '/api/projects', [], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('POST', '/api/projects', [], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(['name' => ['The name field is required.']]);
     }
@@ -145,12 +145,12 @@ class ProjectControllerTest extends TestCase
             'purchase_order' => 2,
         ]);
 
-        $this->json('PUT', '/api/projects/' . (string) $project->id, [
+        $this->json('PUT', '/api/projects/'.(string) $project->id, [
             'name' => 'Comunicaciones',
             'payment_order' => 12,
             'execution_process' => 10,
             'purchase_order' => 12,
-        ], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer ' . $this->token])
+        ], ['Entity-Id' => $this->entity->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Updated successfully']);
 

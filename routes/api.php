@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterClientController;
+use App\Http\Controllers\Config\ConsumerController;
 use App\Http\Controllers\Config\ProjectController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SupplierController;
@@ -49,6 +50,8 @@ Route::put('projects/{project}', [ProjectController::class, 'update']);
 Route::get('suppliers', [SupplierController::class, 'index']);
 Route::post('suppliers', [SupplierController::class, 'store']);
 Route::post('suppliers/sendInvitation', [SupplierController::class, 'sendInvitation']);
+
+Route::get('consumers', [ConsumerController::class, 'index']);
 
 Route::get('invoices/consumer', [InvoiceController::class, 'consumer']);
 Route::post('invoices', [InvoiceController::class, 'store']);

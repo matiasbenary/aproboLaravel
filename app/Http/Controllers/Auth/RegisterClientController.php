@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\EntityCreateAction;
+use App\Actions\Project\CreateProjectAction;
 use App\Actions\UserCreateAction;
 use App\Data\EntityCreateData;
+use App\Data\Project\CreateProjectData;
 use App\Data\UserCreateData;
 use App\Http\Controllers\Controller;
 use App\Models\Entity;
@@ -19,7 +21,7 @@ class RegisterClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request, CreateProjectAction $createProjectAction): JsonResponse
     {
         $entityAction = new EntityCreateAction(EntityCreateData::from($request->all()));
         $entity = $entityAction->execute();
@@ -29,6 +31,15 @@ class RegisterClientController extends Controller
         if ($request->has('invitation_token') && $client = Entity::where('invitation_token', $request->invitation_token)->first()) {
             Suppliers::firstOrCreate(['consumer_id' => $client->id, 'supplier_id' => $entity->id]);
         }
+
+        $projectData = CreateProjectData::from([
+            'name' => 'General',
+            'entity_id' => $entity->id,
+            'payment_order' => 3,
+            'execution_process' => 3,
+            'purchase_order' => 3,
+        ]);
+        $createProjectAction->execute($projectData);
 
         $token = auth()->attempt(['email' => $request->email, 'password' => $request->password]);
 

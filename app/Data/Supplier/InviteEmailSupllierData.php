@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Supplier;
 
 use Spatie\LaravelData\Attributes\Validation\Email;
 use Spatie\LaravelData\Data;
 
-class SupllierInviteEmailData extends Data
+class InviteEmailSupllierData extends Data
 {
     public function __construct(
         #[Email]

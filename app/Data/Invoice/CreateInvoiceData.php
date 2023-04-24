@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Invoice;
 
 use App\States\InvoiceState;
 use Spatie\LaravelData\Data;
 
-class InvoiceCreateData extends Data
+class CreateInvoiceData extends Data
 {
     public function __construct(
         public int $consumer_id,

@@ -14,6 +14,6 @@ class UserBuilder extends Builder
 
     public function findByEmail($email): User|null
     {
-        return  $this->whereEmail($email)->first();
+        return $this->whereEmail($email)->first();
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Actions;
 
-use App\Actions\UserCreateAction;
-use App\Data\EntityData;
-use App\Data\UserCreateData;
+use App\Actions\User\CreateUserAction;
+use App\Data\Entity\EntityData;
+use App\Data\User\CreateUserData;
 use App\Models\Entity;
 use App\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,9 +20,9 @@ class CreateUserActionTest extends TestCase
         $this->seed();
     }
 
-    protected function getUser(): UserCreateData
+    protected function getUser(): CreateUserData
     {
-        return UserCreateData::from(['name' => 'test', 'email' => 'test@test.com', 'password' => 'qweqwe', 'is_root' => false]);
+        return CreateUserData::from(['name' => 'test', 'email' => 'test@test.com', 'password' => 'qweqwe', 'is_root' => false]);
     }
 
     public function test_add_new_user()
@@ -32,7 +32,7 @@ class CreateUserActionTest extends TestCase
 
         $userData = $this->getUser();
 
-        $createUser = new UserCreateAction($userData, $entity, false);
+        $createUser = new CreateUserAction($userData, $entity, false);
 
         $user = $createUser->execute();
 
@@ -56,7 +56,7 @@ class CreateUserActionTest extends TestCase
 
         $userData = $this->getUser();
 
-        $createUser = new UserCreateAction($userData, $entity, true);
+        $createUser = new CreateUserAction($userData, $entity, true);
 
         $user = $createUser->execute();
 

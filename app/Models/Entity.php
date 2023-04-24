@@ -42,6 +42,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $consumers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|Entity[] $suppliers
  * @property-read int|null $suppliers_count
+ * @property string $invitation_token
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read int|null $projects_count
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Entity whereInvitationToken($value)
  *
  * @mixin \Eloquent
  */

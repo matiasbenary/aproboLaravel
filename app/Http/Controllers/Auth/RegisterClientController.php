@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\EntityCreateAction;
+use App\Actions\Entity\CreateEntityAction;
 use App\Actions\Project\CreateProjectAction;
-use App\Actions\UserCreateAction;
-use App\Data\EntityCreateData;
+use App\Actions\User\CreateUserAction;
+use App\Data\Entity\CreateEntityData;
 use App\Data\Project\CreateProjectData;
-use App\Data\UserCreateData;
+use App\Data\User\CreateUserData;
 use App\Http\Controllers\Controller;
 use App\Models\Entity;
 use App\Models\Suppliers;
@@ -23,9 +23,9 @@ class RegisterClientController extends Controller
      */
     public function store(Request $request, CreateProjectAction $createProjectAction): JsonResponse
     {
-        $entityAction = new EntityCreateAction(EntityCreateData::from($request->all()));
+        $entityAction = new CreateEntityAction(CreateEntityData::from($request->all()));
         $entity = $entityAction->execute();
-        $userAction = new UserCreateAction(UserCreateData::from($request->all()), $entity, true);
+        $userAction = new CreateUserAction(CreateUserData::from($request->all()), $entity, true);
         $userAction->execute();
 
         if ($request->has('invitation_token') && $client = Entity::where('invitation_token', $request->invitation_token)->first()) {

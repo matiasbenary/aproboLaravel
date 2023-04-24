@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\User;
 
-use App\Data\EntityData;
-use App\Data\UserCreateData;
-use App\Data\UserData;
+use App\Data\Entity\EntityData;
+use App\Data\User\CreateUserData;
+use App\Data\User\UserData;
 use App\Models\Permission;
 use App\Models\User;
 
-class UserCreateAction implements Actions
+class CreateUserAction
 {
-    public function __construct(public UserCreateData $userData, public EntityData $entityData, public bool $isOwner = false)
+    public function __construct(public CreateUserData $userData, public EntityData $entityData, public bool $isOwner = false)
     {
     }
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Entity;
 
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
 
-class EntityCreateData extends Data
+class CreateEntityData extends Data
 {
     public function __construct(
         public string $business_name,

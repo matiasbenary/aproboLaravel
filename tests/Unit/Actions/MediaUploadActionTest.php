@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\Actions;
 
-use App\Actions\MediaUploadAction;
+use App\Actions\Media\UploadMediaAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class MediaUploadActionTest extends TestCase
+class UploadMediaActionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -21,7 +21,7 @@ class MediaUploadActionTest extends TestCase
     {
         $file = UploadedFile::fake()->image('avatar.jpg');
 
-        $action = new MediaUploadAction();
+        $action = new UploadMediaAction();
 
         $action->execute($file, 'avatars');
 

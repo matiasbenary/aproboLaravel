@@ -2,9 +2,8 @@
 
 namespace Tests\Unit\Actions;
 
-use App\Actions\InvoiceCreateAction;
-use App\Data\InvoiceCreateData;
-use App\Data\UserData;
+use App\Actions\Invoice\CreateInvoiceAction;
+use App\Data\Invoice\CreateInvoiceData;
 use App\Models\Entity;
 use App\Models\Project;
 use App\Models\Supplier;
@@ -43,21 +42,21 @@ class InvoiceCreateTest extends TestCase
 
     protected function getInvoices($data)
     {
-        // return InvoiceCreateData::from(
+        // return CreateInvoiceData::from(
         //     user_id: 1,
         //     project_id: 1,
         //     type: "B",
         //     currency: "ARS",
         //     amount: 1000);
 
-        // return InvoiceCreateData::from([
+        // return CreateInvoiceData::from([
         //     'user_id' => $data['user']->id,
         //     'project_id' => $data['project']->id,
         //     'type' => 'B',
         //     'currency' => 'ARS',
         //     'amount' => 1000,
         // ]);
-        // return InvoiceCreateData::from(["user_id"=>"1"]);
+        // return CreateInvoiceData::from(["user_id"=>"1"]);
         // return UserData::from(name: 'test', email: 'test@test.com', password: 'qweqwe', is_root: false, is_supplier: true);
     }
 
@@ -67,7 +66,7 @@ class InvoiceCreateTest extends TestCase
         // $data = $this->prepareEnvironment();
         // $invoiceData = $this->getInvoices($data);
 
-        // $createInvoice = new InvoiceCreateAction($invoiceData);
+        // $createInvoice = new CreateInvoiceAction($invoiceData);
         // $createInvoice->execute();
 
         // $this->assertDatabaseHas('invoices', [

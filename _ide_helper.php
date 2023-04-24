@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.52.4.
+ * Generated for Laravel 9.52.6.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -18294,7 +18294,7 @@
                     /**
          * 
          *
-         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|array<FlareMiddleware>|\Spatie\FlareClient\class-string<FlareMiddleware> $middleware
+         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|array<FlareMiddleware>|\Spatie\FlareClient\class-string<FlareMiddleware>|callable $middleware
          * @return \Spatie\FlareClient\Flare 
          * @static 
          */ 
@@ -18589,6 +18589,43 @@
         {
                         return \Illuminate\Database\Query\Builder::jsonPaginate($maxResults, $defaultSize);
         }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Eloquent\Relations { 
+            /**
+     * 
+     *
+     */ 
+        class BelongsToMany {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Relation {
+                    /**
+         * 
+         *
+         * @see \Spatie\JsonApiPaginate\JsonApiPaginateServiceProvider::registerMacro()
+         * @param int|null $maxResults
+         * @param int|null $defaultSize
+         * @static 
+         */ 
+        public static function jsonPaginate($maxResults = null, $defaultSize = null)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::jsonPaginate($maxResults, $defaultSize);
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class HasManyThrough {
          
     }
      

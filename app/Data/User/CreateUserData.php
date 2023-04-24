@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\User;
 
 use Hash;
 use Spatie\LaravelData\Data;
 
 /** @typescript */
-class UserCreateData extends Data
+class CreateUserData extends Data
 {
     public function __construct(
         public string $name,

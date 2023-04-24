@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\EntityCreateAction;
-use App\Data\EntityCreateData;
-use App\Data\SupllierInviteEmailData;
+use App\Actions\Entity\CreateEntityAction;
+use App\Data\Entity\CreateEntityData;
+use App\Data\Supplier\InviteEmailSupllierData;
 use App\Mail\SendInvitationSupplier;
 use App\Models\Entity;
 use App\Models\Supplier;
@@ -34,7 +34,7 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $consumerId = $request->header('entity-id');
-        $entityAction = new EntityCreateAction(EntityCreateData::from($request->all()));
+        $entityAction = new CreateEntityAction(CreateEntityData::from($request->all()));
         $supplier = $entityAction->execute();
 
         Suppliers::firstOrCreate(['consumer_id' => $consumerId, 'supplier_id' => $supplier->id]);
@@ -72,7 +72,7 @@ class SupplierController extends Controller
         //
     }
 
-    public function sendInvitation(SupllierInviteEmailData $supplier)
+    public function sendInvitation(InviteEmailSupllierData $supplier)
     {
         $entity = getEntity();
         Mail::to($supplier->email)->send(new SendInvitationSupplier($entity));

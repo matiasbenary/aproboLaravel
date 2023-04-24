@@ -61,6 +61,8 @@ use Spatie\ModelStates\HasStates;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereResponsibleEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereSupplierId($value)
  *
+ * @property-read \App\Models\Entity|null $consumer
+ *
  * @mixin \Eloquent
  */
 class Invoice extends Model

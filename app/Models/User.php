@@ -54,6 +54,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static UserBuilder|User findByEmail($email)
  * @method static UserBuilder|User onlySupplier()
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements JWTSubject

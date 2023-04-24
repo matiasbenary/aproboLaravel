@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\InvoiceCreateAction;
-use App\Actions\MediaUploadAction;
-use App\Data\InvoiceCreateData;
+use App\Actions\Invoice\CreateInvoiceAction;
+use App\Actions\Media\UploadMediaAction;
+use App\Data\Invoice\CreateInvoiceData;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
@@ -42,15 +42,15 @@ class InvoiceController extends Controller
     {
         if ($request->has('file')) {
             $file = $request->file('file');
-            $uploadFile = new MediaUploadAction();
+            $uploadFile = new UploadMediaAction();
             $media = $uploadFile->execute($file, 'invoices');
-            $invoiceData = InvoiceCreateData::from(array_merge($request->toArray(), ['media_id' => $media->id]));
+            $invoiceData = CreateInvoiceData::from(array_merge($request->toArray(), ['media_id' => $media->id]));
         } else {
-            $invoiceData = InvoiceCreateData::from($request->toArray());
+            $invoiceData = CreateInvoiceData::from($request->toArray());
         }
 
-        $invoiceCreateAction = new InvoiceCreateAction($invoiceData);
-        $invoiceCreateAction->execute();
+        $createInvoiceAction = new CreateInvoiceAction($invoiceData);
+        $createInvoiceAction->execute();
 
         return response()->json(['message' => 'Created successfully']);
     }

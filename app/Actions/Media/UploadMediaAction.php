@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\Media;
 
 use App\Models\Media;
 use Illuminate\Http\UploadedFile;
 use Spatie\QueueableAction\QueueableAction;
 use Storage;
 
-class MediaUploadAction
+class UploadMediaAction
 {
     use QueueableAction;
 

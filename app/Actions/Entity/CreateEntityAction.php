@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\Entity;
 
-use App\Data\EntityCreateData;
-use App\Data\EntityData;
+use App\Data\Entity\CreateEntityData;
+use App\Data\Entity\EntityData;
 use App\Models\Entity;
 
-class EntityCreateAction implements Actions
+class CreateEntityAction
 {
     /**
      * Create a new action instance.
      *
      * @return void
      */
-    public function __construct(public EntityCreateData $entityData)
+    public function __construct(public CreateEntityData $entityData)
     {
     }
 

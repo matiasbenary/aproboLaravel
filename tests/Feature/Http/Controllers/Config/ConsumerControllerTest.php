@@ -87,7 +87,7 @@ class ConsumerControllerTest extends TestCase
      */
     public function test_get_all_consumers()
     {
-        $this->json('GET', '/api/consumers', [], ['Entity-Id' => $this->supplier->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/consumers', [], ['Entity-Id' => $this->supplier->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [

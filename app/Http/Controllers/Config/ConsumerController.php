@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ConsumerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['jwt.verify', 'entity.header', 'hasPermission:consumer']);
+    }
     public function index(Request $request)
     {
         $entityId = $request->header('entity-id');

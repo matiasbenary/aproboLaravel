@@ -30,7 +30,7 @@ class InvoiceControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        // $this->artisan('migrate:fresh');
+        $this->artisan('migrate:fresh');
 
         $this->seed();
 
@@ -62,13 +62,13 @@ class InvoiceControllerTest extends TestCase
 
     public function test_get_all_invoices_without_header()
     {
-        $this->json('GET', '/api/invoices/consumer', [], ['Authorization' => 'Bearer '.$this->token])
+        $this->json('GET', '/api/invoices/consumer', [], ['Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_invoices_with_error_header()
     {
-        $this->json('GET', '/api/invoices/consumer', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer '.$this->token])
+        $this->json('GET', '/api/invoices/consumer', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
@@ -89,7 +89,7 @@ class InvoiceControllerTest extends TestCase
             'currency' => 'ARS',
             'responsible_email' => 'test@test.com',
             'message' => 'hola, soy un texto de ejemplo',
-        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -123,7 +123,7 @@ class InvoiceControllerTest extends TestCase
             'responsible_email' => 'test@test.com',
             'message' => 'hola, soy un texto de ejemplo',
             'file' => $file,
-        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        ], ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson(['message' => 'Created successfully']);
 
@@ -139,7 +139,7 @@ class InvoiceControllerTest extends TestCase
             'message' => 'hola, soy un texto de ejemplo',
         ]);
 
-        Storage::disk()->assertExists('invoices/'.$file->hashName());
+        Storage::disk()->assertExists('invoices/' . $file->hashName());
 
         $this->assertDatabaseCount('media', 1);
 
@@ -173,7 +173,7 @@ class InvoiceControllerTest extends TestCase
             'message' => 'hola, soy un texto de ejemplo',
         ]);
 
-        $this->json('GET', '/api/invoices/consumer', ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer '.$this->token])
+        $this->json('GET', '/api/invoices/consumer', ['Entity-Id' => $this->consumer->id, 'Authorization' => 'Bearer ' . $this->token])
             ->assertStatus(Response::HTTP_OK);
         // ->assertJson();
     }

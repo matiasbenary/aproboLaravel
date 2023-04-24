@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Config;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Entity;
 use App\Models\Permission;
@@ -80,19 +80,17 @@ class ConsumerControllerTest extends TestCase
         \DB::table('suppliers')->insert(['supplier_id' => $this->supplier->id, 'consumer_id' => $this->consumer2->id]);
     }
 
-
     public function test_get_all_consumer_without_header()
     {
-        $this->json('GET', '/api/consumers', [], ['Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/consumers', [], ['Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_get_all_consumer_with_error_header()
     {
-        $this->json('GET', '/api/consumers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/consumers', [], ['Entity-Id' => 10000, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
-
 
     /**
      * A basic feature test example.
@@ -101,7 +99,7 @@ class ConsumerControllerTest extends TestCase
      */
     public function test_get_all_consumers()
     {
-        $this->json('GET', '/api/consumers', [], ['Entity-Id' => $this->supplier->id, 'Authorization' => 'Bearer ' . $this->token])
+        $this->json('GET', '/api/consumers', [], ['Entity-Id' => $this->supplier->id, 'Authorization' => 'Bearer '.$this->token])
             ->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [

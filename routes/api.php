@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterClientController;
-use App\Http\Controllers\Config\ConsumerController;
 use App\Http\Controllers\Config\ProjectController;
+use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;

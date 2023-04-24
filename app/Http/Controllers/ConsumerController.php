@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Config;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Entity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -13,6 +12,7 @@ class ConsumerController extends Controller
     {
         $this->middleware(['jwt.verify', 'entity.header', 'hasPermission:consumer']);
     }
+
     public function index(Request $request)
     {
         $entityId = $request->header('entity-id');

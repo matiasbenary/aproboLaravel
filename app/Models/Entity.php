@@ -48,6 +48,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Entity whereInvitationToken($value)
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ *
  * @mixin \Eloquent
  */
 class Entity extends Model

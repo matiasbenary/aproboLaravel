@@ -3,8 +3,8 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Entity;
-use App\Models\Permission;
 use App\Models\Project;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
@@ -47,8 +47,8 @@ class ConsumerControllerTest extends TestCase
         $this->user = User::find($userF->id);
         $this->token = auth()->login($this->user);
 
-        $permissionId = Permission::whereName('consumer')->first()->id;
-        \DB::table('entity_permission_user')->insert(['user_id' => $this->user->id, 'entity_id' => $this->supplier->id, 'permission_id' => $permissionId]);
+        $role = Role::whereName('admin')->first();
+        $userF->roles()->attach($role, ['entity_id' => $this->supplier->id]);
 
         /** @var \App\Models\Entity $this->consumer1 * */
         $this->consumer1 = Entity::factory()->create();

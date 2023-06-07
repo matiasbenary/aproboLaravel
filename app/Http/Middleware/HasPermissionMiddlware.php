@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Models\Permission;
 use Closure;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

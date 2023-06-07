@@ -34,4 +34,14 @@ class Permission extends Model
         'name',
         'description',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_has_permissions')->withPivot('entity_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_has_permissions');
+    }
 }

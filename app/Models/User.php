@@ -91,13 +91,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function entities()
     {
-        return $this->belongsToMany(Entity::class)->withPivot('is_owner');
+        return $this->belongsToMany(Entity::class)->withPivot('is_owner')->withTimestamps();
     }
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'entity_permission_user')
-            ->withPivot('entity_id');
+        return $this->belongsToMany(Permission::class, 'user_has_permissions')->withPivot('entity_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_has_roles')->withPivot('entity_id');
     }
 
     public function getJWTIdentifier()

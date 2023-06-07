@@ -12,7 +12,7 @@ class ProjectController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['jwt.verify', 'entity.header', 'hasPermission:project']);
+        $this->middleware(['jwt.verify', 'entity.header', 'check.role:admin']);
     }
 
     public function index(Request $request)

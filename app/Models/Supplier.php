@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Suppliers
+ * App\Models\Supplier
  *
  * @property int $consumer_id
  * @property int $supplier_id
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @mixin \Eloquent
  */
-class Suppliers extends Model
+class Supplier extends Model
 {
     protected $fillable = [
         'consumer_id',

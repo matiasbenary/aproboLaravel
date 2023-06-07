@@ -7,7 +7,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class EntityPermissionMiddleware
+class EntityPermission
 {
     public function handle(Request $request, Closure $next)
     {

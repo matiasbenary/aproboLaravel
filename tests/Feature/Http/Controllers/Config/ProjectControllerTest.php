@@ -3,8 +3,8 @@
 namespace Tests\Feature\Http\Controllers\Config;
 
 use App\Models\Entity;
-use App\Models\Permission;
 use App\Models\Project;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
@@ -39,8 +39,8 @@ class ProjectControllerTest extends TestCase
         $this->user = User::find($userF->id);
         $this->token = auth()->login($this->user);
 
-        $permissionId = Permission::whereName('project')->first()->id;
-        \DB::table('entity_permission_user')->insert(['user_id' => $this->user->id, 'entity_id' => $this->entity->id, 'permission_id' => $permissionId]);
+        $role = Role::whereName('admin')->first();
+        $userF->roles()->attach($role, ['entity_id' => $this->entity->id]);
 
         Project::factory()->for($this->entity)->create([
             'name' => 'Marketing',

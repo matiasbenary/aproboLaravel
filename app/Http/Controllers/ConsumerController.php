@@ -10,7 +10,7 @@ class ConsumerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['jwt.verify', 'entity.header', 'hasPermission:consumer']);
+        $this->middleware(['jwt.verify', 'entity.header', 'check.role:admin']);
     }
 
     public function index(Request $request)

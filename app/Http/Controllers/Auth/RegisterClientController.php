@@ -10,7 +10,7 @@ use App\Data\Project\CreateProjectData;
 use App\Data\User\CreateUserData;
 use App\Http\Controllers\Controller;
 use App\Models\Entity;
-use App\Models\Suppliers;
+use App\Models\Supplier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -29,7 +29,7 @@ class RegisterClientController extends Controller
         $userAction->execute();
 
         if ($request->has('invitation_token') && $client = Entity::where('invitation_token', $request->invitation_token)->first()) {
-            Suppliers::firstOrCreate(['consumer_id' => $client->id, 'supplier_id' => $entity->id]);
+            Supplier::firstOrCreate(['consumer_id' => $client->id, 'supplier_id' => $entity->id]);
         }
 
         $projectData = CreateProjectData::from([

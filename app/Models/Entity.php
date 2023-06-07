@@ -71,7 +71,17 @@ class Entity extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('is_owner');
+        return $this->belongsToMany(User::class)->withPivot('is_owner')->withTimestamps();
+    }
+
+    public function permissions()
+    {
+        return $this->hasManyThrough(Permission::class, User::class, 'entity_id', 'user_id');
+    }
+
+    public function roles()
+    {
+        return $this->hasManyThrough(Role::class, User::class, 'entity_id', 'user_id');
     }
 
     public function suppliers(): BelongsToMany

@@ -8,7 +8,6 @@ use App\Data\Supplier\InviteEmailSupllierData;
 use App\Mail\SendInvitationSupplier;
 use App\Models\Entity;
 use App\Models\Supplier;
-use App\Models\Suppliers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Mail;
@@ -17,7 +16,7 @@ class SupplierController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['jwt.verify', 'entity.header', 'hasPermission:supplier']);
+        $this->middleware(['jwt.verify', 'entity.header', 'check.role:admin']);
     }
 
     public function index(Request $request)
@@ -37,7 +36,7 @@ class SupplierController extends Controller
         $entityAction = new CreateEntityAction(CreateEntityData::from($request->all()));
         $supplier = $entityAction->execute();
 
-        Suppliers::firstOrCreate(['consumer_id' => $consumerId, 'supplier_id' => $supplier->id]);
+        Supplier::firstOrCreate(['consumer_id' => $consumerId, 'supplier_id' => $supplier->id]);
 
         return response()->json(['message' => 'Created successfully']);
     }

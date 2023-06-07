@@ -47,7 +47,11 @@ class CreateUserActionTest extends TestCase
             'is_owner' => false,
         ]);
 
-        $this->assertDatabaseCount('entity_permission_user', $permission);
+        $this->assertDatabaseHas('user_has_roles', [
+            'user_id' => $user->id,
+            'entity_id' => $entity->id,
+            'role_id' => 2,
+        ]);
     }
 
     public function test_add_new_user_owner()

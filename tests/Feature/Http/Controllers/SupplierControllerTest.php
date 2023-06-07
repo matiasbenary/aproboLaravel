@@ -4,7 +4,7 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Mail\SendInvitationSupplier;
 use App\Models\Entity;
-use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
@@ -44,8 +44,8 @@ class SupplierControllerTest extends TestCase
         $this->user = User::find($userF->id);
         $this->token = auth()->login($this->user);
 
-        $permissionId = Permission::whereName('supplier')->first()->id;
-        \DB::table('entity_permission_user')->insert(['user_id' => $this->user->id, 'entity_id' => $this->consumer->id, 'permission_id' => $permissionId]);
+        $role = Role::whereName('admin')->first();
+        $userF->roles()->attach($role, ['entity_id' => $this->consumer->id]);
 
         /** @var \App\Models\Entity $this->supplier1 * */
         $this->supplier1 = Entity::factory()->create();

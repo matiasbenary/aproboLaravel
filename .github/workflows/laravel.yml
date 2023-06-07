@@ -10,6 +10,18 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mariadb:10
+        env:
+          MYSQL_DATABASE: aprobo
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: secret
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
@@ -32,6 +44,9 @@ jobs:
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+          MYSQL_DATABASE: aprobo
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: secret
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
       run: vendor/bin/phpunit

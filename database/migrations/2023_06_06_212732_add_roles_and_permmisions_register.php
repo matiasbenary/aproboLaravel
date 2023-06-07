@@ -21,6 +21,7 @@ return new class extends Migration
         Permission::create(['name' => 'edit supplier invoices']);
         Permission::create(['name' => 'create supplier invoices']);
 
+        Permission::create(['name' => 'supplier', 'description' => 'CRUD supplier']);
         // create roles and assign created permissions
 
         // this can be done as separate statements

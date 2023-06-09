@@ -29,22 +29,22 @@ class CreatePermissionTables extends Migration
 
         Schema::create('user_has_permissions', function (Blueprint $table) {
             $table->primary(['user_id', 'permission_id', 'entity_id']);
-            $table->foreignId('permission_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('entity_id')->constrained();
+            $table->unsignedBigInteger('permission_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('entity_id');
         });
 
         Schema::create('user_has_roles', function (Blueprint $table) {
             $table->primary(['user_id', 'role_id', 'entity_id']);
-            $table->foreignId('role_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('entity_id')->constrained();
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('entity_id');
         });
 
         Schema::create('role_has_permissions', function (Blueprint $table) {
             $table->primary(['permission_id', 'role_id']);
-            $table->foreignId('permission_id')->constrained();
-            $table->foreignId('role_id')->constrained();
+            $table->unsignedBigInteger('permission_id');
+            $table->unsignedBigInteger('role_id');
         });
     }
 

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('entity_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('entity_id')->constrained();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('entity_id');
             $table->tinyInteger('is_owner')->default(false);
             $table->timestamps();
         });

@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('consumer_id')->references('id')->on('entities');
-            $table->foreignId('supplier_id')->references('id')->on('entities');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('contract_id')->nullable()->constrained();
-            $table->foreignId('media_id')->nullable()->constrained();
-            $table->foreignId('project_id')->constrained();
+            $table->unsignedBigInteger('consumer_id');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('contract_id')->nullable();
+            $table->unsignedBigInteger('media_id')->nullable();
+            $table->unsignedBigInteger('project_id');
             $table->enum('type', ['B', 'C', 'Nota de crédito']);
             $table->enum('currency', ['ARS', 'USD', 'MX', 'COP', 'Otro']);
             $table->unsignedBigInteger('amount');

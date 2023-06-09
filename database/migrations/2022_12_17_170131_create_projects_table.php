@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('payment_order')->default(1);
             $table->integer('execution_process')->default(1);
             $table->integer('purchase_order')->default(1);
-            $table->foreignId('entity_id')->constrained();
+            $table->unsignedBigInteger('entity_id');
             $table->timestamps();
         });
     }

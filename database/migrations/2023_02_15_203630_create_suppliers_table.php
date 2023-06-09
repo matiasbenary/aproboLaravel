@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('suppliers', function (Blueprint $table) {
-            $table->foreignId('consumer_id')->references('id')->on('entities');
-            $table->foreignId('supplier_id')->references('id')->on('entities');
+            $table->unsignedBigInteger('consumer_id');
+            $table->unsignedBigInteger('supplier_id');
             $table->timestamps();
         });
     }

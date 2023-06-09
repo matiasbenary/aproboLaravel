@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('media_id')->nullable()->constrained();
+            $table->unsignedBigInteger('media_id')->nullable();
             $table->timestamps();
         });
     }

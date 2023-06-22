@@ -15,7 +15,7 @@ class AddCorsHeaders
     public function handle($request, Closure $next)
     {
         $headers = [
-            'Access-Control-Allow-Origin' => env('DB_CONNECTION', 'http://localhost:5174'), // Reemplaza con tu origen permitido
+            'Access-Control-Allow-Origin' => env('APP_URL', 'http://localhost:5174'), // Reemplaza con tu origen permitido
             'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE',
             'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
         ];
